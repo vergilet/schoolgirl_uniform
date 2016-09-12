@@ -1,11 +1,11 @@
 = render 'wizard', form: @form
 
-= form_for @form, as: :setup_form, url: @form.last_step? ? form_carrier.finish_path : form_carrier.next_step_path, html: { id: 'setupForm', class: 'multi-supporters-form'} do |form|
+= form_for @form, as: ":#{controller_name}_form".to_sym, url: @form.last_step? ? form_carrier.create_path : form_carrier.next_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form|
   = form.hidden_field :step, value: @form.current_step
   = render "#{ controller_name }/steps/#{@form.current_step}", :form => form
   %p
     .tc
-      = link_to 'back', form_carrier.back_path
+      = link_to 'back', form_carrier.previous_step_path
       - if @setup_form.last_step?
         = form.submit 'next'
       - else

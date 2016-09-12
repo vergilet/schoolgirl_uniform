@@ -40,8 +40,8 @@ module SchoolgirlUniform
     end
 
     def create
-      if @setup_form.valid?
-        @setup_form.save!
+      if @form.valid?
+        @form.save!
         render :finish, locals: {form: @setup_form }
         reset_session
       else
@@ -49,8 +49,8 @@ module SchoolgirlUniform
       end
     end
 
-    def create_carrier
-      @create_carrier ||= SchoolgirlUniform::Carriers::SchoolgirlUniformCarrier.new(@create_form)
+    def form_carrier
+      @form_carrier ||= SchoolgirlUniform::Carriers::Carrier.new(@form)
     end
 
     private
@@ -59,12 +59,8 @@ module SchoolgirlUniform
       session[session_key][:step] = @form.current_step
     end
 
-    def auditor
-      @auditor ||= current_user.accounts_auditor
-    end
-
     def metadata_params
-      #params.permit(:account_id, :public_token, :name, :type, setup_form: setup_form_attributes, institution: institution_attributes)
+      #params.permit(:key)
     end
 
     def session_params
