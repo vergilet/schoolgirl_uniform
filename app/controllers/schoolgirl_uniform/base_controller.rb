@@ -1,7 +1,7 @@
 module SchoolgirlUniform
   class BaseController < ActionController::Base
 
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     before_action :reset_session, only: :show
     before_action :refresh_session, only: [:next, :create]
     before_action :initialize_form,  except: [:index]
@@ -69,7 +69,7 @@ module SchoolgirlUniform
                                     "#{metadata_params[session_key][:step]}_attributes" => metadata_params.except(session_key).to_hash
                                 })
     end
-    
+
     def session_key
       session_key
     end

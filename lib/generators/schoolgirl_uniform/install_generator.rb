@@ -12,23 +12,36 @@ module SchoolgirlUniform
       end
 
       def create_initializer_file
+        create_file("app/config/initializers/schoolgirl_uniform.rb", "SchoolgirlUniform::Forms::Uniformable")
+
         create_file(
-          "app/controllers/#{controller_name.underscore}_controller.rb",
-          "class #{controller_name.camelcase}Controller < SchoolgirlUniform::BaseController\n" +
-          "end"
+          "app/controllers/#{controller_name.underscore}_controller.rb", main_controller
         )
       end
 
       def setup_routes
-        route(
+        route navigtation_resources
+      end
+
+      private
+
+      def navigtation_resources
         "resource :#{controller_name.underscore}, controller: '#{controller_name.underscore}', only: [:show, :create] do\n" +
             "\t\tcollection do\n" +
             "\t\t\tget  :current\n" +
             "\t\t\tpost :next\n" +
             "\t\t\tget  :previous\n" +
             "\t\t\tget  :finish\n" +
-          "\t\tend\n" +
-        "\tend")
+            "\t\tend\n" +
+         "\tend"
+      end
+
+      def main_controller
+        "class #{controller_name.camelcase}Controller < SchoolgirlUniform::BaseController\n" +
+        "\tdef session_key\n" +
+        "\t\t:#{controller_name.underscore}\n" +
+        "\tend\n" +
+        "end"
       end
     end
   end
