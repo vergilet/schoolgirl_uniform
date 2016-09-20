@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'activemodel', '~> 5.0'
 
-  spec.add_dependency "bundler", '~> 1.13'
+  spec.add_dependency "bundler", '< 2.0'
   spec.add_dependency "rake", '~> 11.2'
   spec.add_dependency "rspec", '~> 3.5'
   spec.add_dependency "virtus", '~> 1.0'

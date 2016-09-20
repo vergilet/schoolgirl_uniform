@@ -1,5 +1,5 @@
 # encoding: utf-8
-# rails generate schoolgirl_uniform:install
+# rails generate schoolgirl_uniform:install MyForm
 
 module SchoolgirlUniform
   module Generators
@@ -12,7 +12,9 @@ module SchoolgirlUniform
       end
 
       def create_initializer_file
-        create_file("app/config/initializers/schoolgirl_uniform.rb", "SchoolgirlUniform::Forms::Uniformable")
+        # create_file("config/initializers/schoolgirl_uniform.rb", "SchoolgirlUniform::Forms::Uniformable")
+
+        create_file("app/forms/#{controller_name.underscore}_form.rb", main_form)
 
         create_file(
           "app/controllers/#{controller_name.underscore}_controller.rb", main_controller
@@ -38,9 +40,22 @@ module SchoolgirlUniform
 
       def main_controller
         "class #{controller_name.camelcase}Controller < SchoolgirlUniform::BaseController\n" +
-        "\tdef session_key\n" +
-        "\t\t:#{controller_name.underscore}\n" +
-        "\tend\n" +
+            "\tdef initialize_form\n" +
+            "\t\t@form = #{controller_name.camelcase}Form.new(session[session_key] || {})\n" +
+            "\t\t@form.user_id = current_user.id\n" +
+            "\tend\n" +
+            "\n" +
+            "\tdef session_key\n" +
+            "\t\t:#{controller_name.underscore}\n" +
+            "\tend\n" +
+        "end"
+      end
+
+      def main_form
+        "class #{controller_name.camelcase}Form < SchoolgirlUniform::BaseForm\n" +
+            "\tdef initialize(options = {})\n" +
+            "\t\tinitialize_attributes(options)\n" +
+            "\tend\n" +
         "end"
       end
     end
