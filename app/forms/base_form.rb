@@ -3,8 +3,10 @@ module SchoolgirlUniform
 
     include ActiveModel::Model
     include Virtus.model
+
     attribute :step, String
     attribute :base_errors, Object
+    attribute :user_id, Integer
 
 
     def self.steps
