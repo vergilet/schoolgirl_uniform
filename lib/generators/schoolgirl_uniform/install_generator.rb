@@ -5,20 +5,28 @@ module SchoolgirlUniform
   module Generators
     class InstallGenerator < Rails::Generators::Base
 
+      source_root File.expand_path("../templates", __FILE__)
+
       argument :controller_name, :type => :string, :default => "form"
 
+      # def self.source_root
+      #   @_schoolgirl_uniform_source_root ||= File.expand_path("../templates", __FILE__)
+      # end
+
       def self.source_root
-        @_schoolgirl_uniform_source_root ||= File.expand_path("../templates", __FILE__)
+        File.expand_path("../templates", __FILE__)
       end
-
       def create_initializer_file
-        # create_file("config/initializers/schoolgirl_uniform.rb", "SchoolgirlUniform::Forms::Uniformable")
-
-        create_file("app/forms/#{controller_name.underscore}_form.rb", main_form)
-
-        create_file(
-          "app/controllers/#{controller_name.underscore}_controller.rb", main_controller
-        )
+        # create_file("app/forms/#{controller_name.underscore}_form.rb", main_form)
+        #
+        # create_file(
+        #   "app/controllers/#{controller_name.underscore}_controller.rb", main_controller
+        # )
+        #
+        # create_file(
+        #     "app/views/#{controller_name.underscore}/show.html.erb", main_view
+        # )
+        template "wizard.html", "app/views/#{controller_name.underscore}/_wizard.html.erb"
       end
 
       def setup_routes
@@ -40,9 +48,10 @@ module SchoolgirlUniform
 
       def main_controller
         "class #{controller_name.camelcase}Controller < SchoolgirlUniform::BaseController\n" +
+            "\n"+
             "\tdef initialize_form\n" +
             "\t\t@form = #{controller_name.camelcase}Form.new(session[session_key] || {})\n" +
-            "\t\t@form.user_id = current_user.id\n" +
+            "\t\t \# @form.user_id = current_user.id\n" +
             "\tend\n" +
             "\n" +
             "\tdef session_key\n" +
@@ -53,10 +62,21 @@ module SchoolgirlUniform
 
       def main_form
         "class #{controller_name.camelcase}Form < SchoolgirlUniform::BaseForm\n" +
+            "\n"+
+            "\t# attribute :user_id, String\n"+
+            "\n"+
             "\tdef initialize(options = {})\n" +
             "\t\tinitialize_attributes(options)\n" +
             "\tend\n" +
         "end"
+      end
+
+      def main_view
+        ''
+      end
+
+      def copy_wizard
+        template "wizard.html", "app/views/#{controller_name.underscore}/_wizard.html.erb"
       end
     end
   end
