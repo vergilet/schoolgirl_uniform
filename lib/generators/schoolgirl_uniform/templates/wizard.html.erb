@@ -1,0 +1,12 @@
+<div class="stepwizard">
+  <div class="active milestone">
+    <span>registration</span>
+  </div>
+  <% form.steps.each_with_index do |step, index| %>
+      <div class="<%=  'active' if form.current_step_index > index %> milestone">
+      <span>
+        <%= form.steps[index] %>
+      </span>
+      </div>
+  <% end %>
+</div>

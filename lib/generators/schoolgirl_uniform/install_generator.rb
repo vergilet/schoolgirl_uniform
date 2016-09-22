@@ -5,28 +5,24 @@ module SchoolgirlUniform
   module Generators
     class InstallGenerator < Rails::Generators::Base
 
-      source_root File.expand_path("../templates", __FILE__)
-
       argument :controller_name, :type => :string, :default => "form"
 
-      # def self.source_root
-      #   @_schoolgirl_uniform_source_root ||= File.expand_path("../templates", __FILE__)
-      # end
-
       def self.source_root
-        File.expand_path("../templates", __FILE__)
+        @_schoolgirl_uniform_source_root ||= File.expand_path("../templates", __FILE__)
       end
+
       def create_initializer_file
-        # create_file("app/forms/#{controller_name.underscore}_form.rb", main_form)
-        #
-        # create_file(
-        #   "app/controllers/#{controller_name.underscore}_controller.rb", main_controller
-        # )
-        #
-        # create_file(
-        #     "app/views/#{controller_name.underscore}/show.html.erb", main_view
-        # )
-        template "wizard.html", "app/views/#{controller_name.underscore}/_wizard.html.erb"
+        copy_file "wizard.html.erb", "app/views/#{controller_name.underscore}/_wizard.html.erb"
+        copy_file "show.html.erb", "app/views/#{controller_name.underscore}/show.html.erb"
+        copy_file "steps/first_step.html.erb", "app/views/#{controller_name.underscore}/steps/_first_step.html.erb"
+        copy_file "steps/last_step.html.erb", "app/views/#{controller_name.underscore}/steps/_last_step.html.erb"
+
+        create_file("app/forms/#{controller_name.underscore}_form.rb", main_form)
+
+        create_file(
+          "app/controllers/#{controller_name.underscore}_controller.rb", main_controller
+        )
+
       end
 
       def setup_routes
@@ -76,7 +72,7 @@ module SchoolgirlUniform
       end
 
       def copy_wizard
-        template "wizard.html", "app/views/#{controller_name.underscore}/_wizard.html.erb"
+        template "wizard.html.erb", "app/views/#{controller_name.underscore}/_wizard.html.erb"
       end
     end
   end

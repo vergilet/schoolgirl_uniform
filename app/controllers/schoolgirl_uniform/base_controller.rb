@@ -6,6 +6,7 @@ module SchoolgirlUniform
     before_action :refresh_session, only: [:next, :create]
     before_action :initialize_form,  except: [:index]
     after_action :refresh_current_step, only: [:next, :previous]
+    helper_method :form_carrier
 
     def show; end
 
@@ -50,7 +51,7 @@ module SchoolgirlUniform
     end
 
     def form_carrier
-      @form_carrier ||= SchoolgirlUniform::Carriers::Carrier.new(@form)
+      @form_carrier ||= SchoolgirlUniform::Carrier.new(@form)
     end
 
     private

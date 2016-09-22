@@ -5,4 +5,5 @@ require "virtus"
 module SchoolgirlUniform
   autoload :BaseForm, 'base_form'
   autoload :Uniformable, 'uniformable'
+  autoload :Carrier, 'carrier'
 end

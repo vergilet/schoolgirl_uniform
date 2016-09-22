@@ -6,7 +6,7 @@
   %p
     .tc
       = link_to 'back', form_carrier.previous_step_path
-      - if @setup_form.last_step?
+      - if @form.last_step?
         = form.submit 'next'
       - else
         = form.submit 'next', :name => 'next'
