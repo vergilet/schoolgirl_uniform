@@ -19,9 +19,7 @@ module SchoolgirlUniform
 
         create_file("app/forms/#{controller_name.underscore}_form.rb", main_form)
 
-        create_file(
-          "app/controllers/#{controller_name.underscore}_controller.rb", main_controller
-        )
+        copy_file("controllers/template_controller.rb", "app/controllers/#{controller_name.underscore}_controller.rb")
 
       end
 
@@ -42,19 +40,19 @@ module SchoolgirlUniform
          "\tend"
       end
 
-      def main_controller
-        "class #{controller_name.camelcase}Controller < SchoolgirlUniform::BaseController\n" +
-            "\n"+
-            "\tdef initialize_form\n" +
-            "\t\t@form = #{controller_name.camelcase}Form.new(session[session_key] || {})\n" +
-            "\t\t \# @form.user_id = current_user.id\n" +
-            "\tend\n" +
-            "\n" +
-            "\tdef session_key\n" +
-            "\t\t:#{controller_name.underscore}\n" +
-            "\tend\n" +
-        "end"
-      end
+#       def main_controller
+#         "class #{controller_name.camelcase}Controller < SchoolgirlUniform::BaseController\n" +
+#             "\n"+
+#             "\tdef initialize_form\n" +
+#             "\t\t@form = #{controller_name.camelcase}Form.new(session[session_key] || {})\n" +
+#             "\t\t \# @form.user_id = current_user.id\n" +
+#             "\tend\n" +
+#             "\n" +
+#             "\tdef session_key\n" +
+#             "\t\t:#{controller_name.underscore}\n" +
+#             "\tend\n" +
+#         "end"
+#       end
 
       def main_form
         "class #{controller_name.camelcase}Form < SchoolgirlUniform::BaseForm\n" +
