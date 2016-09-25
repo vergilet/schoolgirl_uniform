@@ -16,11 +16,8 @@ module SchoolgirlUniform
         copy_file "show.html.erb", "app/views/#{controller_name.underscore}/show.html.erb"
         copy_file "steps/first_step.html.erb", "app/views/#{controller_name.underscore}/steps/_first_step.html.erb"
         copy_file "steps/last_step.html.erb", "app/views/#{controller_name.underscore}/steps/_last_step.html.erb"
-
-        create_file("app/forms/#{controller_name.underscore}_form.rb", main_form)
-
+        copy_file("forms/template_controller.rb", "app/forms/#{controller_name.underscore}_form.rb")
         copy_file("controllers/template_controller.rb", "app/controllers/#{controller_name.underscore}_controller.rb")
-
       end
 
       def setup_routes
@@ -30,14 +27,16 @@ module SchoolgirlUniform
       private
 
       def navigtation_resources
-        "resource :#{controller_name.underscore}, controller: '#{controller_name.underscore}', only: [:show, :create] do\n" +
-            "\t\tcollection do\n" +
-            "\t\t\tget  :current\n" +
-            "\t\t\tpost :next\n" +
-            "\t\t\tget  :previous\n" +
-            "\t\t\tget  :finish\n" +
-            "\t\tend\n" +
-         "\tend"
+        <<-FILE
+          resource :#{controller_name.underscore}, controller: '#{controller_name.underscore}', only: [:show, :create] do
+            collection do
+              get  :current
+              post :next
+              get  :previous
+              get  :finish
+            end
+          end
+        FILE
       end
 
 #       def main_controller
