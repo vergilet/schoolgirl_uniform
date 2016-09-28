@@ -5,6 +5,14 @@ class <%= class_name %>Controller < SchoolgirlUniform::BaseController
     # @form.user_id = current_user.id
   end
 
+  def metadata_params
+    params.permit(session_key.to_sym => form_attributes)
+  end
+
+  def form_attributes
+    [:step, :step_one_attributes, :step_two_attributes]
+  end
+
   def session_key
     :<%= class_name.underscore  %>
   end

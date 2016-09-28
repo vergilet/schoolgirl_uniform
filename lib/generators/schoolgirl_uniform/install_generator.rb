@@ -9,9 +9,6 @@ module SchoolgirlUniform
       argument :controller_name, type: :string, default: "form"
 
       def create_initializer_file
-        puts controller_name.underscore
-        puts file_name
-
         copy_file "wizard.html.erb", "app/views/#{file_name}/_wizard.html.erb"
         copy_file "show.html.erb", "app/views/#{file_name}/show.html.erb"
         copy_file "steps/first_step.html.erb", "app/views/#{file_name}/steps/_first_step.html.erb"
@@ -21,13 +18,7 @@ module SchoolgirlUniform
       end
 
       def setup_routes
-        route navigtation_resources
-      end
-
-      private
-
-      def navigtation_resources
-        <<-FILE
+        route <<-FILE
 resource :#{file_name}, controller: '#{file_name}', only: [:show, :create] do
     collection do
       get  :current
@@ -37,25 +28,6 @@ resource :#{file_name}, controller: '#{file_name}', only: [:show, :create] do
     end
   end
         FILE
-      end
-
-      def main_form
-        "class #{controller_name.camelcase}Form < SchoolgirlUniform::BaseForm\n" +
-            "\n"+
-            "\t# attribute :user_id, String\n"+
-            "\n"+
-            "\tdef initialize(options = {})\n" +
-            "\t\tinitialize_attributes(options)\n" +
-            "\tend\n" +
-        "end"
-      end
-
-      def main_view
-        ''
-      end
-
-      def copy_wizard
-        template "wizard.html.erb", "app/views/#{controller_name.underscore}/_wizard.html.erb"
       end
     end
   end
