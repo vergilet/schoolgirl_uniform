@@ -1,19 +1,21 @@
-class <%= class_name %>Controller < SchoolgirlUniform::BaseController
+class <%= class_name.camelcase %>Controller < SchoolgirlUniform::BaseController
 
   def initialize_form
     @form = <%= class_name.camelcase %>Form.new(session[session_key] || {})
-    # @form.user_id = current_user.id
   end
 
-  def metadata_params
-    params.permit(session_key.to_sym => form_attributes)
-  end
+  def finish; end
 
   def form_attributes
-    [:step, :step_one_attributes, :step_two_attributes]
+    [:username, :password, :email, :phone]
   end
 
-  def session_key
-    :<%= class_name.underscore  %>
+  def paths
+    {
+      next: next_<%= class_name.snakecase %>_path,
+      current: current_<%= class_name.snakecase %>_path,
+      previous: previous_<%= class_name.snakecase %>_path,
+      create: <%= class_name.snakecase %>_path
+    }
   end
 end

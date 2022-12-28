@@ -10,9 +10,12 @@ module SchoolgirlUniform
 
       def create_initializer_file
         copy_file "wizard.html.erb", "app/views/#{file_name}/_wizard.html.erb"
+        copy_file "form_errors.html.erb", "app/views/#{file_name}/_form_errors.html.erb"
         copy_file "show.html.erb", "app/views/#{file_name}/show.html.erb"
-        copy_file "steps/first_step.html.erb", "app/views/#{file_name}/steps/_first_step.html.erb"
-        copy_file "steps/last_step.html.erb", "app/views/#{file_name}/steps/_last_step.html.erb"
+        copy_file "finish.html.erb", "app/views/#{file_name}/finish.html.erb"
+        copy_file "steps/first.html.erb", "app/views/#{file_name}/steps/_first.html.erb"
+        copy_file "steps/second.html.erb", "app/views/#{file_name}/steps/_second.html.erb"
+        copy_file "steps/third.html.erb", "app/views/#{file_name}/steps/_third.html.erb"
         template "forms/template_form.rb.erb", "app/forms/#{file_name}_form.rb"
         template "controllers/template_controller.rb.erb", "app/controllers/#{file_name}_controller.rb"
       end
@@ -26,7 +29,7 @@ resource :#{file_name}, controller: '#{file_name}', only: [:show, :create] do
       get  :previous
       get  :finish
     end
-  end
+end
         FILE
       end
     end

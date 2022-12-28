@@ -1,6 +1,0 @@
-.stepwizard
-  .milestone{ class: 'active' }
-    %span= 'registration'
-  - form.steps.each_with_index do |step, index|
-    .milestone{ class: "#{ 'active' if form.current_step_index > index}" }
-      %span= form.steps[index]

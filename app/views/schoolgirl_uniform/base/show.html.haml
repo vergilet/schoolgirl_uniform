@@ -1,12 +1,18 @@
-= render 'wizard', form: @form
+:css
+  .field_with_errors input {
+      border: 1px solid red
+  }
 
-= form_for @form, as: ":#{controller_name}_form".to_sym, url: @form.last_step? ? form_carrier.create_path : form_carrier.next_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form|
+= render 'wizard', form: @form
+= form_for @form, as: "#{controller_name}_form".to_sym, url: @form.last_step? ? form_carrier.create_path : form_carrier.next_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form|
   = form.hidden_field :step, value: @form.current_step
-  = render "#{ controller_name }/steps/#{@form.current_step}", :form => form
-  %p
-    .tc
+  = render "form_errors", form: form
+  = render "#{ controller_name }/steps/#{@form.current_step}", form: form
+  .tc
+    - if !@form.first_step?
       = link_to 'back', form_carrier.previous_step_path
-      - if @form.last_step?
-        = form.submit 'next'
-      - else
-        = form.submit 'next', :name => 'next'
+    - if @form.last_step?
+      = form.submit 'submit'
+    - else
+      = form.submit 'next'
+

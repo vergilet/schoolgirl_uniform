@@ -6,26 +6,20 @@ module SchoolgirlUniform
       base.include Virtus.model
     end
 
-    def self.steps
-      %w()
-    end
-
     def initialize(options = {})
       initialize_attributes(options)
     end
 
-    def valid?
-      current_step_errors.empty?
+    def save!
+      raise NotImplementedError
     end
-
-    def save!; end
 
     def current_step
       step || steps.first
     end
 
     def next_step
-      return if last_step? || !current_step_valid?
+      return if last_step? || !valid?
       shift_step(1)
     end
 
@@ -52,6 +46,7 @@ module SchoolgirlUniform
     private
 
     def initialize_attributes(new_attributes)
+      self.errors ||= ActiveModel::Errors.new(self)
       self.attributes = defaults.merge(new_attributes)
     end
 
@@ -63,28 +58,12 @@ module SchoolgirlUniform
       false
     end
 
-    def current_step_errors
-      { }
-    end
-
-    def errors_full_messages
-      current_step_errors.full_messages
-    end
-
-    def all_error_keys
-      (all_errors.keys + base_errors.keys).map(&:to_s)
-    end
-
-    def all_errors
-      []
-    end
-
-    def current_step_valid?
-      self.valid?
-    end
-
     def shift_step(delta)
       self.step = steps[steps.index(current_step) + delta]
+    end
+
+    def on_step(step)
+      current_step == step
     end
   end
 end

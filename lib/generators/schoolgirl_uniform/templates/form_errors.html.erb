@@ -1,0 +1,20 @@
+<style>
+    .schoolgirl-uniform-errors {
+        border: 1px solid red;
+    }
+    .schoolgirl-uniform-errors span {
+        color: red;
+    }
+</style>
+
+<% if @form.errors.any? %>
+  <div class="schoolgirl-uniform-errors">
+    <ul>
+      <% @form.errors.full_messages.each do |message|%>
+        <li>
+          <span><%= message %> </span>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+<%end%>

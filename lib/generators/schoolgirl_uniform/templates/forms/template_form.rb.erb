@@ -1,10 +1,52 @@
 class <%= class_name %>Form < SchoolgirlUniform::BaseForm
+  attribute :username, String
+  attribute :password, String
+  attribute :email, String
+  attribute :phone, String
 
-  # attribute :user_id, String
+  validate :custom_username_validation, if: proc { on_step('first') }
+  validate :custom_email_validation,    if: proc { on_step('second') }
+  validate :custom_phone_validation,    if: proc { on_step('third') }
 
-  def initialize(options = {})
-    initialize_attributes(options)
+  def custom_username_validation
+    if username.blank?
+      errors.add(:username, 'cannot be blank')
+    end
+    if username.size < 3
+      errors.add(:username, 'should have at least 3 symbols')
+    end
   end
-  
-  attr_reader :<%= plural_name %>, :<%= plural_name.singularize %>
+
+  def custom_email_validation
+    if email.blank?
+      errors.add(:email, 'cannot be blank')
+    end
+  end
+
+  def custom_phone_validation
+    if phone.blank?
+      errors.add(:phone, 'cannot be blank')
+    end
+  end
+
+  def self.steps
+    %w[first second third]
+  end
+
+  def save!
+    ActiveRecord::Base.transaction do
+      user.save!(validate: false)
+      personal_data.save!(validate: false)
+    end
+  end
+
+  private
+
+  def user
+    User.new(username: username, password: password)
+  end
+
+  def personal_data
+    user.build_personal_data(email: email, phone: phone)
+  end
 end

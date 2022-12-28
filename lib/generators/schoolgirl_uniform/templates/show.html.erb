@@ -1,15 +1,24 @@
+<style>
+    .field_with_errors input {
+        border: 1px solid red
+    }
+</style>
+
 <%= render 'wizard', form: @form %>
-<%= form_for @form, as: ":#{controller_name}_form".to_sym, url: @form.last_step? ? form_carrier.create_path : form_carrier.next_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form| %>
-<%= form.hidden_field :step, value: @form.current_step %>
-<%= render "#{ controller_name }/steps/#{@form.current_step}", :form => form %>
-<p>
-<div class="tc">
-    <%= link_to 'back', form_carrier.previous_step_path %>
-    <% if @form.last_step? %>
-    <%= form.submit 'next' %>
-    <% else %>
-    <%= form.submit 'next', :name => 'next' %>
+<%= form_for @form, as: "#{controller_name}_form".to_sym, url: @form.last_step? ? form_carrier.create_path : form_carrier.next_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form| %>
+  <%= form.hidden_field :step, value: @form.current_step %>
+
+  <%= render "form_errors", form: form %>
+  <%= render "#{ controller_name }/steps/#{@form.current_step}", form: form %>
+
+  <div class="tc">
+    <% if !@form.first_step? %>
+      <%= link_to 'back', form_carrier.previous_step_path %>
     <% end %>
-</div>
-</p>
+    <% if @form.last_step? %>
+      <%= form.submit 'submit' %>
+    <% else %>
+      <%= form.submit 'next' %>
+    <% end %>
+  </div>
 <% end %>

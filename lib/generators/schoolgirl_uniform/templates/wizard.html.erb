@@ -1,12 +1,21 @@
-<div class="stepwizard">
-  <div class="active milestone">
-    <span>registration</span>
-  </div>
+<style>
+    .schoolgirl-uniform-step-wizard {
+        margin: 10px 25%;
+    }
+    .milestone {
+        display: inline-block;
+    }
+    div.active {
+        background-color: greenyellow;
+    }
+</style>
+
+<div class="schoolgirl-uniform-step-wizard">
   <% form.steps.each_with_index do |step, index| %>
-      <div class="<%=  'active' if form.current_step_index > index %> milestone">
-      <span>
-        <%= form.steps[index] %>
-      </span>
-      </div>
+    <div class="<%=  'active' if form.current_step_index >= index %> milestone">
+        <span>
+          <%= step %>
+        </span>
+    </div>
   <% end %>
 </div>
