@@ -6,7 +6,7 @@
 </p>
 
 
-## :womens: Schoolgirl Uniform
+## Schoolgirl Uniform
 
 Just another concept of Multistep form :feet: for Rails projects.
 
