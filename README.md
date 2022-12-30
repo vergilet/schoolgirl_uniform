@@ -86,7 +86,25 @@ create  app/controllers/catgirls_survey_controller.rb
   
   validates :username, presence: true, if: proc { on_step('second') }
   ```
-
+4. Inside `save!` method build your records, set them with form attributes and save them in transaction. 
+   Use `.save!(validate: false)` to skip native validations on model.
+   In order to return the result set the `@identifier` with created records reference/references ( e.g. `{user_id: 1, personal_data_id: 2}` )
+  ```ruby
+  # CatgirlsSurveyForm 
+  
+  def save!
+    user = User.new(username: username)
+    personal_data = user.build_personal_data(email: email)
+    
+    ActiveRecord::Base.transaction do
+      user.save!(validate: false)
+      personal_data.save!(validate: false)
+    end
+    
+    @identifier = user.id
+  end
+  ```
+  
 
 ## Contributing
 
