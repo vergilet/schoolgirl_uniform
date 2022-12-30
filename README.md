@@ -1,6 +1,6 @@
 # SchoolgirlUniform
 
-<img align="right" src="https://user-images.githubusercontent.com/2478436/28493917-7c3389c8-6f28-11e7-932e-da360b68f3d3.gif"/> 
+<img align="right" src="https://user-images.githubusercontent.com/2478436/210022832-6287fd8b-899d-4052-b112-38a30d49a4b2.png"/> 
 
 TODO: Delete this and the text above, and describe your gem
 
