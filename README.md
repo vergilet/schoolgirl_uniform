@@ -14,7 +14,7 @@
 
 Just another concept of Multistep form :feet: for Rails projects.
 
-<!--br clear="right"/-->
+<br>
 
 ## Installation
 
