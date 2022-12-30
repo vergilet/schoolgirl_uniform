@@ -14,10 +14,6 @@ Add this line to your application's Gemfile:
 gem 'schoolgirl_uniform'
 ```
 
-And then execute:
-
-    $ bundle
-
 Then generate scaffold for multistep form:
 
     $ rails generate schoolgirl_uniform:install MyForm
