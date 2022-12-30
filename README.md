@@ -89,7 +89,8 @@ create  app/controllers/catgirls_survey_controller.rb
 4. Inside `save!` method build your records, set them with form attributes and save them in transaction. 
    Use `.save!(validate: false)` to skip native validations on model.
    In order to return the result set the `@identifier` with created records reference/references 
-   ( e.g. `{user_id: 1, personal_data_id: 2}` )
+   
+   ( e.g. `1` or `{user_id: 1, personal_data_id: 2}` )
   ```ruby
   # CatgirlsSurveyForm 
   
