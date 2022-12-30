@@ -1,6 +1,6 @@
 # SchoolgirlUniform
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/schoolgirl_uniform`. To experiment with that code, run `bin/console` for an interactive prompt.
+<img align="right" src="https://user-images.githubusercontent.com/2478436/28493917-7c3389c8-6f28-11e7-932e-da360b68f3d3.gif"/> 
 
 TODO: Delete this and the text above, and describe your gem
 
