@@ -64,7 +64,28 @@ create  app/controllers/catgirls_survey_controller.rb
     
 ## Usage
 
-TODO ...
+1. Inside the `Form` file declare the steps:
+
+  ```ruby
+  # CatgirlsSurveyForm
+
+  def self.steps
+    %w[first second third]
+  end
+  ```
+2. Define form fields
+
+  ```ruby
+  # CatgirlsSurveyForm  
+  
+  attribute :username, String
+  ```
+3. Define validation and select appropriate step for it
+  ```ruby
+  # CatgirlsSurveyForm 
+  
+  validates :username, presence: true, if: proc { on_step('second') }
+  ```
 
 
 ## Contributing
