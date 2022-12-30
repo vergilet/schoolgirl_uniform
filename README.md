@@ -43,7 +43,7 @@ Feel free to contribute:
 ## License
 The gem is available as open source under the terms of the MIT License.
 
-Copyright © 2022 Yaro.
+Copyright © 2016 Yaro.
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen)](https://raw.githubusercontent.com/vergilet/schoolgirl_uniform/master/LICENSE)
 
