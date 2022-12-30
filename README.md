@@ -15,7 +15,7 @@
   </a>
 </p>
 
-Just another concept of Multistep form :feet: for Rails projects.
+:feet: Multistep form concept for Rails projects. Allows to create complex forms for a few models simultaneously. Supports selectable per step validations without data persistance into db.
 
 <br>
 
@@ -33,9 +33,8 @@ Then you need to generate scaffold for future multistep form:
 ```ruby
 $ rails generate schoolgirl_uniform:install CatgirlsSurvey
 ```
-<br>
 
-> You can also use snake case, so `catgirls_survey` is identical to `CatgirlsSurvey` and will generate the same output during scaffolding.
+> You can also use snake case, so `catgirls_survey` would be identical to `CatgirlsSurvey` and will generate the same output during scaffolding.
 
 <br>
 
