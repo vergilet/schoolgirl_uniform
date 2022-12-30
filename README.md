@@ -7,7 +7,7 @@
 </p>
 <br>
 <p align="right">
-  <a href="#">
+  <a href="#schoolgirl-uniform">
     <img align="right" width="30%" src="https://user-images.githubusercontent.com/2478436/210023063-339c9be3-5ac3-4d9b-87a1-60d1d8462861.png"/> 
   </a>
 </p>
