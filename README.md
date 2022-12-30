@@ -2,7 +2,7 @@
 <img align="right" width="30%" src="https://user-images.githubusercontent.com/2478436/210023063-339c9be3-5ac3-4d9b-87a1-60d1d8462861.png"/> 
 </a>
 
-## :womens: SchoolgirlUniform
+## :womens: Schoolgirl Uniform
 
 Just another concept of Multistep form :feet: for Rails projects.
 
