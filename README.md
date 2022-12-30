@@ -10,17 +10,17 @@ Just another concept of Multistep form :feet: for Rails projects.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+To start using it just add this line to your application's Gemfile:
 
 ```ruby
 gem 'schoolgirl_uniform'
 ```
 
-Then generate scaffold for multistep form:
+Then need to generate scaffold for future multistep form:
 
     $ rails generate schoolgirl_uniform:install MyForm
 
-</div>
+<br clear="right">
     
 ## Usage
 
