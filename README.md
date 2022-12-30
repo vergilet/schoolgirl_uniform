@@ -90,7 +90,7 @@ create  app/controllers/catgirls_survey_controller.rb
    Use `.save!(validate: false)` to skip native validations on model.
    In order to return the result set the `@identifier` with created records reference/references 
    
-   ( e.g. `1` or `{user_id: 1, personal_data_id: 2}` )
+   ( e.g. simple `1234` or complex `{user_id: 1234, personal_data_id: 5678}` )
   ```ruby
   # CatgirlsSurveyForm 
   
