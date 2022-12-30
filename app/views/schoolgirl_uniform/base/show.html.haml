@@ -1,10 +1,14 @@
 :css
+  .field_with_errors {
+      display: inline-block;
+  }
   .field_with_errors input {
       border: 1px solid red
   }
 
+
 = render 'wizard', form: @form
-= form_for @form, as: "#{controller_name}_form".to_sym, url: @form.last_step? ? form_carrier.create_path : form_carrier.next_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form|
+= form_for @form, as: "#{controller_name}_form".to_sym, url: form_carrier.next_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form|
   = form.hidden_field :step, value: @form.current_step
   = render "form_errors", form: form
   = render "#{ controller_name }/steps/#{@form.current_step}", form: form

@@ -4,7 +4,9 @@ class <%= class_name.camelcase %>Controller < SchoolgirlUniform::BaseController
     @form = <%= class_name.camelcase %>Form.new(session[session_key] || {})
   end
 
-  def finish; end
+  def finish
+    @record = User.find_by(uuid: params[:identifier])
+  end
 
   def form_attributes
     [:username, :password, :email, :phone]
@@ -12,10 +14,8 @@ class <%= class_name.camelcase %>Controller < SchoolgirlUniform::BaseController
 
   def paths
     {
-      next: next_<%= class_name.snakecase %>_path,
-      current: current_<%= class_name.snakecase %>_path,
-      previous: previous_<%= class_name.snakecase %>_path,
-      create: <%= class_name.snakecase %>_path
+      current: current_<%= class_name.snakecase %>_path(step: @form.current_step),
+      previous: previous_<%= class_name.snakecase %>_path
     }
   end
 end

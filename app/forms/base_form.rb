@@ -3,6 +3,7 @@ module SchoolgirlUniform
 
     include SchoolgirlUniform::Uniformable
     attribute :step, String
+    attr_reader :identifier
 
     def self.steps
       raise NotImplementedError

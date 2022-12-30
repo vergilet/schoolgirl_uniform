@@ -1,10 +1,14 @@
 module SchoolgirlUniform
   class BaseController < ActionController::Base
     before_action :reset_session, only: :show
-    before_action :refresh_session, only: [:next, :create]
+    before_action :refresh_session, only: :current
     before_action :initialize_form,  except: [:index]
-    after_action :refresh_current_step, only: [:next, :previous]
+    after_action :refresh_current_step, only: [:show, :current, :previous]
     helper_method :form_carrier
+
+    def show
+      redirect_to action: :current, step: @form.current_step
+    end
 
     def initialize_form
       @form = BaseForm.new(session[session_key] || {})
@@ -15,32 +19,23 @@ module SchoolgirlUniform
     end
 
     def refresh_session
+      return if request.get?
       session[session_key].deep_merge!(session_params)
     end
 
-    def next
-      return render('show') unless @form.valid?
-      @form.next_step
-      redirect_to action: :current
-    end
-
     def current
-      render 'show'
+      if request.post?
+        return render :show unless @form.valid?
+        redirect_to redirect_options
+      elsif request.get?
+        return render :show if params[:step] == @form.current_step
+        redirect_to action: :current, step: @form.current_step
+      end
     end
 
     def previous
       @form.previous_step
-      redirect_to action: :current
-    end
-
-    def create
-      if @form.valid?
-        @form.save!
-        render :finish, locals: {form: @form }
-        reset_session
-      else
-        render 'show'
-      end
+      redirect_to action: :current, step: @form.current_step
     end
 
     def form_carrier
@@ -51,10 +46,8 @@ module SchoolgirlUniform
 
     def paths
       {
-        next: nil,
         current: nil,
-        previous: nil,
-        create: nil
+        previous: nil
       }
     end
 
@@ -67,11 +60,22 @@ module SchoolgirlUniform
     end
 
     def session_params
-      metadata_params.to_hash.deep_dup
+      metadata_params.to_hash
     end
 
     def session_key
       "#{controller_name}_form"
+    end
+
+    def redirect_options
+      if @form.last_step?
+        @form.save!
+        reset_session
+        { action: :finish, identifier: @form.identifier }
+      else
+        @form.next_step
+        { action: :current, step: @form.current_step }
+      end
     end
   end
 end

@@ -4,29 +4,29 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
   attribute :email, String
   attribute :phone, String
 
-  validate :custom_username_validation, if: proc { on_step('first') }
-  validate :custom_email_validation,    if: proc { on_step('second') }
-  validate :custom_phone_validation,    if: proc { on_step('third') }
+  validates :username, presence: true, length: 3..10, if: proc { on_step('first') }
+  validate :custom_username_validation,               if: proc { on_step('first') }
+  validates :password, length: { minimum: 3 },        if: proc { on_step('first') }
+
+  validates :email, presence: true,                   if: proc { on_step('second') }
+  validate :custom_email_validation,                  if: proc { on_step('second') }
+
+  validates :phone, presence: true,                   if: proc { on_step('third') }
+  validate :custom_phone_validation,                  if: proc { on_step('third') }
 
   def custom_username_validation
-    if username.blank?
-      errors.add(:username, 'cannot be blank')
-    end
-    if username.size < 3
-      errors.add(:username, 'should have at least 3 symbols')
-    end
+    errors.add(:username, 'cannot contain "@"') if username.include?('@')
+    errors.add(:username, 'cannot contain "#"') if username.include?('#')
+    errors.add(:username, 'cannot contain "?"') if username.include?('?')
   end
 
   def custom_email_validation
-    if email.blank?
-      errors.add(:email, 'cannot be blank')
-    end
+    errors.add(:email, 'should contain "@"') if email.exclude?('@')
+    errors.add(:email, 'should not contain ".."') if email.include?('..')
   end
 
   def custom_phone_validation
-    if phone.blank?
-      errors.add(:phone, 'cannot be blank')
-    end
+    errors.add(:phone, 'should be max 14 symbols') if phone.size > 14
   end
 
   def self.steps
@@ -38,12 +38,13 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
       user.save!(validate: false)
       personal_data.save!(validate: false)
     end
+    @identifier = user.reload.uuid
   end
 
   private
 
   def user
-    User.new(username: username, password: password)
+    @user ||= User.new(username: username, password: password)
   end
 
   def personal_data

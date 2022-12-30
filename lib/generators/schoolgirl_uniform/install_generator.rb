@@ -22,10 +22,9 @@ module SchoolgirlUniform
 
       def setup_routes
         route <<-FILE
-resource :#{file_name}, controller: '#{file_name}', only: [:show, :create] do
+resource :#{file_name}, controller: '#{file_name}', only: :show do
     collection do
-      get  :current
-      post :next
+      match :current, via: [:get, :post]
       get  :previous
       get  :finish
     end
