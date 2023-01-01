@@ -138,10 +138,27 @@ By default Scaffolding generates 3 steps, but you can modify, delete them or add
 
 
 ### Controller
- - **CatgirlsSurveyController**
- TODO
+ - e.g. _CatgirlsSurveyController_ - _app/controllers/catgirls_survey_controller.rb_
 
-
+1. Make sure you have listed all form fields (used for permit params)
+```ruby
+def form_attributes
+  [:username, :password, :email, :phone]
+end
+```
+2. Fetch resource/resources from DB using identifier, which you set in `.save!`
+```ruby
+  def finish
+    @record = User.find_by(uuid: params[:identifier])
+    ...
+    # or if you have a few identifiers
+    ...
+    @record1 = Book.find_by(title: params[:identifier][:title])
+    @record2 = Author.find_by(id: params[:identifier][:author_id])
+  end
+```
+ 
+ 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/vergilet/schoolgirl_uniform
