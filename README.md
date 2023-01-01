@@ -116,9 +116,9 @@ To achieve working multistep form you need to configure FVC:
     - __form_errors.html.erb_
     
     and steps
-    - __first.html.erb_
-    - __second.html.erb_
-    - __third.html.erb_
+    - _/steps/_first.html.erb_
+    - _/steps/_second.html.erb_
+    - _/steps/_third.html.erb_
 
 Please notice that _show_ and _finish_ are action views, others are partials. Feel free to modify html and styles around the form.
 
