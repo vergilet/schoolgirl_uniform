@@ -64,38 +64,30 @@ create  app/controllers/catgirls_survey_controller.rb
     
 ## Usage and Config
 
-To achieve working multistep form you need to configure everything on 3 levels:
+To achieve working multistep form you need to configure FVC (like MVC but _form_ woild be your model):
 
 - [**1. Form**](#form)
 
-- [**2. Controller**](#controller)
-
 - [**2. View**](#view)
+
+- [**3. Controller**](#controller)
 
 
 ### Form
  - **CatgirlsSurveyForm**
 
-1. Inside the `Form` file declare the steps:
-
+1. Declare the steps:
   ```ruby
-  # CatgirlsSurveyForm
-
   def self.steps
     %w[first second third]
   end
   ```
 2. Define form fields
-
   ```ruby
-  # CatgirlsSurveyForm  
-  
   attribute :username, String
   ```
 3. Define validation and select appropriate step for it
   ```ruby
-  # CatgirlsSurveyForm 
-  
   validates :username, presence: true, if: proc { on_step('second') }
   ```
 4. Inside `save!` method build your records, set them with form attributes and save them in transaction. 
@@ -104,8 +96,6 @@ To achieve working multistep form you need to configure everything on 3 levels:
    
    ( e.g. simple `1234` or complex `{user_id: 1234, personal_data_id: 5678}` )
   ```ruby
-  # CatgirlsSurveyForm 
-  
   def save!
     user = User.new(username: username)
     personal_data = user.build_personal_data(email: email)
@@ -118,10 +108,6 @@ To achieve working multistep form you need to configure everything on 3 levels:
     @identifier = user.id
   end
   ```
-### Controller
- - **CatgirlsSurveyController**
- TODO
-
 ### View
  - Scaffolding will generate example structure of view files:
     - _show.html.erb_
@@ -133,6 +119,10 @@ To achieve working multistep form you need to configure everything on 3 levels:
     - __first.html.erb_
     - __second.html.erb_
     - __third.html.erb_
+
+### Controller
+ - **CatgirlsSurveyController**
+ TODO
 
 
 ## Contributing
