@@ -123,8 +123,16 @@ To achieve working multistep form you need to configure everything on 3 levels:
  TODO
 
 ### View
- - **Steps, Show, Finish, etc.**
-TODO
+ - Scaffolding will generate example structure of view files:
+    - _show.html.erb_
+    - _finish.html.erb_
+    - __wizard.html.erb_
+    - __form_errors.html.erb_
+    
+    and steps
+    - __first.html.erb_
+    - __second.html.erb_
+    - __third.html.erb_
 
 
 ## Contributing
