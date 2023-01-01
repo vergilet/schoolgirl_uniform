@@ -64,17 +64,17 @@ create  app/controllers/catgirls_survey_controller.rb
     
 ## Usage and Config
 
-To achieve working multistep form you need to configure FVC (like MVC but _form_ woild be your model):
+To achieve working multistep form you need to configure FVC:
 
-- [**1. Form**](#form)
+- [**Form**](#form)
 
-- [**2. View**](#view)
+- [**View**](#view)
 
-- [**3. Controller**](#controller)
+- [**Controller**](#controller)
 
 
 ### Form
- - **CatgirlsSurveyForm**
+ - e.g. _CatgirlsSurveyForm_ - _app/forms/catgirls_survey_form.rb_ 
 
 1. Declare the steps:
   ```ruby
