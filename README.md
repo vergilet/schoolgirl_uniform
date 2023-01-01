@@ -62,7 +62,19 @@ create  app/controllers/catgirls_survey_controller.rb
 
 <br clear="right">
     
-## Usage
+## Usage and Config
+
+To achieve working multistep form you need to configure everything on 3 levels:
+
+- [**1. Form**](#form)
+
+- [**2. Controller**](#controller)
+
+- [**2. View**](#view)
+
+
+### Form
+ - **CatgirlsSurveyForm**
 
 1. Inside the `Form` file declare the steps:
 
@@ -106,7 +118,14 @@ create  app/controllers/catgirls_survey_controller.rb
     @identifier = user.id
   end
   ```
-  
+### Controller
+ - **CatgirlsSurveyController**
+ TODO
+
+### View
+ - **Steps, Show, Finish, etc.**
+TODO
+
 
 ## Contributing
 
