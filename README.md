@@ -115,16 +115,16 @@ To achieve working multistep form you need to configure FVC:
     - __wizard.html.erb_
     - __form_errors.html.erb_
     
-    and steps
-    - _/steps/_first.html.erb_
-    - _/steps/_second.html.erb_
-    - _/steps/_third.html.erb_
+    and steps/:
+    - __first.html.erb_
+    - __second.html.erb_
+    - __third.html.erb_
 
 Please notice that _show_ and _finish_ are action views, others are partials. Feel free to modify html and styles around the form.
 
 #### Steps
 
-By default Scaffolding generates 3 steps, but you can modify, delete them or add new steps. Just make sure that steps are **__partials_** and match correspond names inside **_Form_** (e.g. CatgirlsSurveyForm): 
+By default Scaffolding generates 3 steps, but you can modify, delete them or add new steps. Just make sure that steps are **__partials_** and match corresponded names inside **_Form_** (e.g. CatgirlsSurveyForm): 
 
   ```ruby
   # app/views/catgirls_survey/steps/_first.html.erb
