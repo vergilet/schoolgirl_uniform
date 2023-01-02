@@ -36,32 +36,7 @@ $ rails generate schoolgirl_uniform:install CatgirlsSurvey
 
 > You can also use snake case, so `catgirls_survey` would be identical to `CatgirlsSurvey` and will generate the same output during scaffolding.
 
-<br>
 
-The result will look like this:
-
-```flex
-create  app/views/catgirls_survey/_wizard.html.erb
-create  app/views/catgirls_survey/_form_errors.html.erb
-create  app/views/catgirls_survey/show.html.erb
-create  app/views/catgirls_survey/finish.html.erb
-create  app/views/catgirls_survey/steps/_first.html.erb
-create  app/views/catgirls_survey/steps/_second.html.erb
-create  app/views/catgirls_survey/steps/_third.html.erb
-create  app/forms/catgirls_survey_form.rb
-create  app/controllers/catgirls_survey_controller.rb
- route  resource :catgirls_survey, controller: 'catgirls_survey', only: :show do
-          collection do
-            match :current, via: [:get, :post]
-            get  :previous
-            get  :finish
-          end
-        end
-
-```
-
-<br clear="right">
-    
 ## Usage and Config
 
 To achieve working multistep form you need to configure FVC:
@@ -72,6 +47,7 @@ To achieve working multistep form you need to configure FVC:
 
 - [**Controller**](#controller)
 
+<br clear="right">
 
 ### Form
  - e.g. _CatgirlsSurveyForm_ - _app/forms/catgirls_survey_form.rb_ 
