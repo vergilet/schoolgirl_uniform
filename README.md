@@ -46,7 +46,7 @@ To achieve working multistep form you need to configure FVC:
 - [**View**](#view)
 
 - [**Controller**](#controller)
-
+<hr>
 <br clear="right">
 
 ### Form
