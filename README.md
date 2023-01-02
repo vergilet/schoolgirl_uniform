@@ -47,7 +47,6 @@ To achieve working multistep form you need to configure FVC:
 
 - [**Controller**](#controller)
 <hr>
-<br clear="right">
 
 ### Form
  - e.g. _CatgirlsSurveyForm_ - _app/forms/catgirls_survey_form.rb_ 
