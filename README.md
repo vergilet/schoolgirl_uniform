@@ -41,11 +41,11 @@ $ rails generate schoolgirl_uniform:install CatgirlsSurvey
 
 To achieve working multistep form you need to configure FVC:
 
-- :school_satchel: [**Form**](#form)
+- :school_satchel: [**Form**](#school_satchel-form)
 
-- :womans_clothes: [**View**](#view)
+- :womans_clothes: [**View**](#womans_clothes-view)
 
-- :dress: [**Controller**](#controller)
+- :dress: [**Controller**](#dress-controller)
 <hr>
 
 ### :school_satchel: Form
