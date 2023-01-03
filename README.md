@@ -114,7 +114,7 @@ By default Scaffolding generates 3 steps, but you can modify, delete them or add
 
 
 ### :dress: Controller
- - e.g. _CatgirlsSurveyController_ - _app/controllers/catgirls_survey_controller.rb_
+    e.g. CatgirlsSurveyController - app/controllers/catgirls_survey_controller.rb
 
 1. Make sure you have listed all form fields (used for permit params)
 ```ruby
