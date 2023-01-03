@@ -60,10 +60,12 @@ To achieve working multistep form you need to configure FVC:
 2. Define form fields
   ```ruby
   attribute :username, String
+  attribute :email, String
   ```
 3. Define validation and select appropriate step for it
   ```ruby
-  validates :username, presence: true, if: proc { on_step('second') }
+  validates :username, presence: true, if: proc { on_step('first') }
+  validates :email, presence: true,    if: proc { on_step('second') }
   ```
 4. Inside `save!` method build your records, set them with form attributes and save them in transaction. 
    Use `.save!(validate: false)` to skip native validations on model.
