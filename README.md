@@ -49,7 +49,7 @@ To achieve working multistep form you need to configure FVC:
 <hr>
 
 ### :school_satchel: Form
- - e.g. _CatgirlsSurveyForm_ - _app/forms/catgirls_survey_form.rb_ 
+    e.g. CatgirlsSurveyForm - app/forms/catgirls_survey_form.rb
 
 1. Declare the steps:
   ```ruby
@@ -95,7 +95,8 @@ To achieve working multistep form you need to configure FVC:
     - __second.html.erb_
     - __third.html.erb_
 
-Please notice that _show_ and _finish_ are action views, others are partials. Feel free to modify html and styles around the form.
+:exclamation: Please notice that **_show_** and **_finish_** are action views, others are partials. \
+:art: Feel free to modify html and styles around the form.
 
 #### :infinity: Steps
 
