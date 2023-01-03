@@ -48,6 +48,12 @@ To achieve working multistep form you need to configure FVC:
 - :school_satchel: [**Controller**](#school_satchel-controller)
 <hr>
 
+<p align="center">
+  <a href="#">
+    <img align="center" width="75%" src="https://user-images.githubusercontent.com/2478436/210439098-6230592e-4e94-4236-88e6-70d162d5369a.png"/> 
+  </a>
+</p>
+
 ### :womans_clothes: Form
     e.g. CatgirlsSurveyForm - app/forms/catgirls_survey_form.rb
 
