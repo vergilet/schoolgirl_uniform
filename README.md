@@ -41,14 +41,14 @@ $ rails generate schoolgirl_uniform:install CatgirlsSurvey
 
 To achieve working multistep form you need to configure FVC:
 
-- [**Form**](#form)
+- :school_satchel: [**Form**](#form)
 
-- [**View**](#view)
+- :womans_clothes: [**View**](#view)
 
-- [**Controller**](#controller)
+- :dress: [**Controller**](#controller)
 <hr>
 
-### Form
+### :school_satchel: Form
  - e.g. _CatgirlsSurveyForm_ - _app/forms/catgirls_survey_form.rb_ 
 
 1. Declare the steps:
@@ -83,7 +83,7 @@ To achieve working multistep form you need to configure FVC:
     @identifier = user.id
   end
   ```
-### View
+### :womans_clothes: View
  - Scaffolding will generate example structure of view files:
     - _show.html.erb_
     - _finish.html.erb_
@@ -97,7 +97,7 @@ To achieve working multistep form you need to configure FVC:
 
 Please notice that _show_ and _finish_ are action views, others are partials. Feel free to modify html and styles around the form.
 
-#### Steps
+#### :infinity: Steps
 
 By default Scaffolding generates 3 steps, but you can modify, delete them or add new steps. Just make sure that steps are **__partials_** and match corresponded names inside **_Form_** (e.g. CatgirlsSurveyForm): 
 
@@ -112,7 +112,7 @@ By default Scaffolding generates 3 steps, but you can modify, delete them or add
   ```
 
 
-### Controller
+### :dress: Controller
  - e.g. _CatgirlsSurveyController_ - _app/controllers/catgirls_survey_controller.rb_
 
 1. Make sure you have listed all form fields (used for permit params)
