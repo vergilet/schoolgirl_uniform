@@ -64,12 +64,12 @@ To achieve working multistep form you need to configure FVC:
     %w[first second third]
   end
   ```
-2. Define form fields
+2. Define form fields:
   ```ruby
   attribute :username, String
   attribute :email, String
   ```
-3. Define validation and select appropriate step for it
+3. Define validation and select appropriate step for it:
   ```ruby
   validates :username, presence: true, if: proc { on_step('first') }
   validates :email, presence: true,    if: proc { on_step('second') }
