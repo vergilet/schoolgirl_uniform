@@ -15,7 +15,8 @@
   </a>
 </p>
 
-:feet: Multistep form concept for Rails projects. Allows to create complex forms for a few models simultaneously. Supports selectable per step validations without data persistence into db.
+:feet: Multistep form concept for Rails projects. Allows to create complex forms for a few models simultaneously. Supports selectable per step validations without data persistence into db.\
+Currently uses session to store data before actual save.
 
 <br>
 
