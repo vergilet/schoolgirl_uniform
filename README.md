@@ -1,5 +1,6 @@
-<br>
-<br>
+<p align="right">
+  <a href="https://rubygems.org/gems/repost"><img align="right" src="https://user-images.githubusercontent.com/2478436/51829691-c55cc000-22f6-11e9-99a5-42f88a8f2a55.png" width="56" height="56" /></a>
+</p>
 <p align="center">
   <a href="#">
     <img align="center" width="75%" src="https://user-images.githubusercontent.com/2478436/210048098-9d09b442-f057-42e1-b77b-94277928e452.png"/> 
