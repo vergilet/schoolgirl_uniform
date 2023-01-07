@@ -110,7 +110,7 @@ To achieve working multistep form you need to configure FVC:
 
 #### :infinity: Steps
 
-By default Scaffolding generates 3 steps, but you can modify, delete or add new steps. Just make sure that steps are **__partials_** and match corresponded names inside **_Form_** (e.g. CatgirlsSurveyForm): 
+By default Scaffolding generates 3 steps, but you can modify, delete or add new steps. \ Just make sure that steps are **__partials_** and match corresponded names inside **_Form_** (e.g. CatgirlsSurveyForm): 
 
   ```ruby
   # app/views/catgirls_survey/steps/_first.html.erb
