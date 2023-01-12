@@ -133,7 +133,7 @@ def form_attributes
   [:username, :password, :email, :phone]
 end
 ```
-2. Fetch resource(s) from DB using identifier, which you set in `.save!`
+2. Fetch resource(s) from DB using `identifier`, which you set in `.save!`
 ```ruby
   def finish
     @record = User.find_by(uuid: params[:identifier])
