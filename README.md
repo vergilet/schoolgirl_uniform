@@ -76,7 +76,7 @@ To achieve working multistep form you need to configure FVC:
   validates :email, presence: true,    if: proc { on_step('second') }
   ```
 4. Inside `save!` method build your records, set them with form attributes and save them in transaction. \
-   Use `.save!(validate: false)` to skip native validations on model.
+   Use `.save!(validate: false)` to skip native validations on model. \
    In order to return the result set the `@identifier` with created records reference/references 
    
    ( e.g. simple `1234` or complex `{user_id: 1234, personal_data_id: 5678}` )
