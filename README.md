@@ -75,7 +75,9 @@ To achieve working multistep form you need to configure FVC:
   # attribute :birthday, DateTime
   # attribute :published, Boolean, default: false # default: :default_editor_title
   
-  # def default_editor_title
+  # attribute :description, String, default: :default_editor_description
+  
+  # def default_editor_description
   #   ...
   # end
   ```
