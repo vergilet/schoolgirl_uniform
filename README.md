@@ -70,10 +70,10 @@ To achieve working multistep form you need to configure FVC:
   attribute :username, String
   attribute :email, String
   
-  # attribute :page_numbers, Array[Integer]
   # attribute :age, Integer, default: 0
+  # attribute :page_numbers, Array[Integer]
   # attribute :birthday, DateTime
-  # attribute :published, Boolean, default: false # default: :default_editor_title
+  # attribute :published, Boolean, default: false
   
   # attribute :description, String, default: :default_editor_description
   
