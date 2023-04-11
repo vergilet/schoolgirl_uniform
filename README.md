@@ -69,6 +69,15 @@ To achieve working multistep form you need to configure FVC:
   ```ruby
   attribute :username, String
   attribute :email, String
+  
+  # attribute :page_numbers, Array[Integer]
+  # attribute :age, Integer, default: 0
+  # attribute :birthday, DateTime
+  # attribute :published, Boolean, default: false # default: :default_editor_title
+  
+  # def default_editor_title
+  #   ...
+  # end
   ```
 3. Define validation and select appropriate step for it:
   ```ruby
