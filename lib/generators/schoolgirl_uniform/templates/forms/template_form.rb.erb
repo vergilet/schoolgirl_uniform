@@ -1,4 +1,5 @@
 class <%= class_name %>Form < SchoolgirlUniform::BaseForm
+
   attribute :username, String
   attribute :password, String
 
@@ -15,9 +16,7 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
   attribute :address_field_2, String
   attribute :zip_code, String
 
-  def self.steps
-    %w[first second third]
-  end
+  steps %w[first second third]
 
   def self.step_names
     {
