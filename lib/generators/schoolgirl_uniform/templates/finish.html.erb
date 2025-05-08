@@ -1,7 +1,56 @@
-uuid: <%= @record.uuid %>
-<br>
-username: <%= @record.username %>
-<br>
-email: <%= @record.personal_data.email %>
-<br>
-phone: <%= @record.personal_data.phone %>
+<div class="results-display">
+  <h3>Registration Complete!</h3>
+  <div class="result-item">
+    <b>ID:</b> <%= @record.id %>
+  </div>
+
+  <div class="result-item">
+    <b>Username:</b> <%= @record.username %>
+  </div>
+  <hr>
+
+  <div class="result-item">
+    <b>Date of Birth:</b> <%= @record.personal_detail&.date_of_birth %>
+  </div>
+
+  <div class="result-item">
+    <b>Gender:</b> <%= @record.personal_detail&.gender %>
+  </div>
+
+  <div class="result-item">
+    <b>Favourite Color:</b> <%= @record.personal_detail&.favourite_color %>
+  </div>
+
+  <div class="result-item">
+    <b>Device Type:</b> <%= @record.personal_detail&.device_type %>
+  </div>
+  <hr>
+
+  <div class="result-item">
+    <b>Email:</b> <%= @record.contact_info&.email %>
+  </div>
+
+  <div class="result-item">
+    <b>Phone Number:</b> <%= @record.contact_info&.phone_number %>
+  </div>
+
+  <div class="result-item">
+    <b>Country:</b> <%= @record.contact_info&.country %>
+  </div>
+
+  <div class="result-item">
+    <b>City:</b> <%= @record.contact_info&.city %>
+  </div>
+
+  <div class="result-item">
+    <b>Address Line 1:</b> <%= @record.contact_info&.address_field_1 %>
+  </div>
+
+  <div class="result-item">
+    <b>Address Line 2:</b> <%= @record.contact_info&.address_field_2 %>
+  </div>
+
+  <div class="result-item">
+    <b>Zip Code:</b> <%= @record.contact_info&.zip_code %>
+  </div>
+</div>

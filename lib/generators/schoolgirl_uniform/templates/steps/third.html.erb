@@ -1,2 +1,34 @@
-<%= form.label :phone %>
-<%= form.text_field :phone %>
+<div class="form-group">
+  <%= form.label :email %>
+  <%= form.email_field :email %> <%# Use email_field for emails %>
+</div>
+
+<div class="form-group">
+  <%= form.label :phone_number %>
+  <%= form.telephone_field :phone_number %> <%# Use telephone_field for phone numbers %>
+</div>
+
+<div class="form-group">
+  <%= form.label :country %>
+  <%= form.text_field :country %>
+</div>
+
+<div class="form-group">
+  <%= form.label :city %>
+  <%= form.text_field :city %>
+</div>
+
+<div class="form-group">
+  <%= form.label :address_field_1 %>
+  <%= form.text_field :address_field_1 %>
+</div>
+
+<div class="form-group">
+  <%= form.label :address_field_2 %>
+  <%= form.text_field :address_field_2 %>
+</div>
+
+<div class="form-group">
+  <%= form.label :zip_code %>
+  <%= form.text_field :zip_code %>
+</div>

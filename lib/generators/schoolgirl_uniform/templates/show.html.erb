@@ -1,27 +1,228 @@
 <style>
-    .field_with_errors {
-        display: inline-block;
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px 0;
     }
-    .field_with_errors input {
-        border: 1px solid red
+
+    .form-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Step Wizard Styling */
+    .schoolgirl-uniform-step-wizard {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: space-around; /* Distribute milestones evenly */
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .schoolgirl-uniform-step-wizard .milestone {
+        padding: 8px 15px;
+        border: 1px solid #ccc;
+        border-radius: 20px; /* More rounded */
+        background-color: #f9f9f9;
+        color: #555;
+        font-size: 0.9em;
+        text-align: center;
+        flex-grow: 1; /* Allow milestones to grow */
+        margin: 0 5px; /* Add some spacing between milestones */
+    }
+
+    .schoolgirl-uniform-step-wizard .milestone.active { /* Active step */
+        background-color: #4CAF50; /* A more standard green */
+        color: white;
+        border-color: #388E3C;
+    }
+
+    .schoolgirl-uniform-step-wizard .milestone.completed { /* Completed step (optional, if you want to differentiate) */
+        background-color: #D4EDDA;
+        color: #155724;
+        border-color: #C3E6CB;
+    }
+
+    /* Form Styling */
+    .multistep-form .form-step-content {
+        border: 1px solid #ddd; /* Border for each step's content area */
+        padding: 25px;
+        border-radius: 6px;
+        margin-bottom: 25px;
+        background-color: #fdfdfd;
+    }
+
+    /* Styling for individual form fields/groups */
+    .multistep-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .multistep-form .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+        font-size: 0.95em;
+    }
+
+    .multistep-form .form-group input[type="text"],
+    .multistep-form .form-group input[type="password"],
+    .multistep-form .form-group input[type="date"],
+    .multistep-form .form-group input[type="email"],
+    .multistep-form .form-group input[type="tel"], /* For phone_number */
+    .multistep-form .form-group select {
+        width: 100%; /* Make inputs take full width of their container */
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; /* Important for width calculation */
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+    }
+
+    .multistep-form .form-group input[type="text"]:focus,
+    .multistep-form .form-group input[type="password"]:focus,
+    .multistep-form .form-group input[type="date"]:focus,
+    .multistep-form .form-group input[type="email"]:focus,
+    .multistep-form .form-group input[type="tel"]:focus,
+    .multistep-form .form-group select:focus {
+        border-color: #4CAF50;
+        outline: none;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+
+    /* Error Styling */
+    /* Error Styling for individual fields (Rails default) */
+    .field_with_errors {
+        display: inline-block; /* Or 'block' if you prefer full width */
+        width: 100%;
+    }
+    .field_with_errors input,
+    .field_with_errors select {
+        border: 1px solid red !important;
+    }
+
+    /* Custom Error Messages Block Styling (User Provided) */
+    .schoolgirl-uniform-errors {
+        border: 1px solid red;
+        padding: 10px; /* Added some padding for better appearance */
+        margin-bottom: 20px; /* Added margin for spacing */
+        border-radius: 4px; /* Optional: for rounded corners */
+        background-color: #ffebeb; /* Optional: light red background */
+    }
+    .schoolgirl-uniform-errors ul {
+        list-style-type: none; /* Removes default bullet points */
+        padding-left: 0; /* Removes default padding */
+        margin: 0;
+    }
+    .schoolgirl-uniform-errors li {
+        margin-bottom: 5px; /* Spacing between error messages */
+    }
+    .schoolgirl-uniform-errors span {
+        color: red;
+    }
+
+    /* Navigation Buttons Styling */
+    .form-navigation {
+        display: flex;
+        justify-content: space-between; /* Puts 'back' and 'next/submit' on opposite ends */
+        align-items: center;
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .form-navigation a,
+    .form-navigation input[type="submit"] {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-navigation a { /* Back button */
+        background-color: #6c757d;
+        color: white;
+    }
+    .form-navigation a:hover {
+        background-color: #5a6268;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .form-navigation input[type="submit"] { /* Next/Submit button */
+        background-color: #007bff; /* A nice blue for primary action */
+        color: white;
+    }
+    .form-navigation input[type="submit"]:hover {
+        background-color: #0056b3;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Finish Step / Results Styling */
+    .results-display {
+        background-color: #e9f5e9;
+        border: 1px solid #c8e6c9;
+        padding: 25px;
+        border-radius: 6px;
+        line-height: 1.8; /* Better readability */
+    }
+
+    .results-display h3 {
+        margin-top: 0;
+        color: #2e7d32;
+        border-bottom: 1px solid #a5d6a7;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .results-display .result-item {
+        margin-bottom: 12px;
+        font-size: 1.05em;
+    }
+    .results-display .result-item b {
+        color: #333;
+        margin-right: 8px;
     }
 </style>
+<div class="form-container">
 
-<%= render 'wizard', form: @form %>
-<%= form_for @form, as: "#{controller_name}_form".to_sym, url: form_carrier.current_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |form| %>
-  <%= form.hidden_field :step, value: @form.current_step %>
+  <%= render 'wizard', form: @form %>
 
-  <%= render "form_errors", form: form %>
-  <%= render "#{ controller_name }/steps/#{@form.current_step}", form: form %>
+  <%= form_for @form, as: "#{controller_name}_form".to_sym, url: form_carrier.current_step_path, html: { id: "#{controller_name}_form", class: 'multistep-form' } do |f| %>
+    <%= f.hidden_field :step, value: @form.current_step %>
 
-  <div class="tc">
-    <% if !@form.first_step? %>
-      <%= link_to 'back', form_carrier.previous_step_path %>
-    <% end %>
-    <% if @form.last_step? %>
-      <%= form.submit 'submit' %>
-    <% else %>
-      <%= form.submit 'next' %>
-    <% end %>
-  </div>
-<% end %>
+    <%= render "form_errors", form: @form %>
+
+    <div class="form-step-content">
+      <%= render "#{ controller_name }/steps/#{@form.current_step.underscore}", form: f %>
+    </div>
+
+    <div class="form-navigation">
+      <% if !@form.first_step? %>
+        <%= link_to 'Back', form_carrier.previous_step_path %>
+      <% else %>
+        <span>&nbsp;</span>
+      <% end %>
+
+      <% if @form.last_step? %>
+        <%= f.submit 'Submit Details' %>
+      <% else %>
+        <%= f.submit 'Next Step' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

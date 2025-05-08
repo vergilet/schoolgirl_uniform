@@ -9,6 +9,10 @@ module SchoolgirlUniform
       raise NotImplementedError
     end
 
+    def self.step_names
+      raise NotImplementedError
+    end
+
     def initialize(options = {})
       initialize_attributes(options)
     end

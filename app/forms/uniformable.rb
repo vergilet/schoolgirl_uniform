@@ -24,6 +24,7 @@ module SchoolgirlUniform
     end
 
     def previous_step
+      return if first_step?
       shift_step(-1)
     end
 
@@ -37,6 +38,10 @@ module SchoolgirlUniform
 
     def steps
       self.class.steps
+    end
+
+    def step_names
+      self.class.step_names
     end
 
     def current_step_index
