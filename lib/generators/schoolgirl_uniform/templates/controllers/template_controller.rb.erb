@@ -5,11 +5,7 @@ class <%= class_name.camelcase %>Controller < SchoolgirlUniform::BaseController
   end
 
   def finish
-    @record = User.find_by(uuid: params[:identifier])
-  end
-
-  def form_attributes
-    CatgirlsSurveyForm.attributes.map(&:name)
+    @record = User.find_by(id: params[:identifier])
   end
 
   def paths
