@@ -9,7 +9,7 @@ class <%= class_name.camelcase %>Controller < SchoolgirlUniform::BaseController
   end
 
   def form_attributes
-    [:username, :password, :email, :phone]
+    CatgirlsSurveyForm.attributes.map(&:name)
   end
 
   def paths

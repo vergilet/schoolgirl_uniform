@@ -2,7 +2,7 @@ module SchoolgirlUniform
   class BaseController < ActionController::Base
     before_action :reset_session, only: :show
     before_action :refresh_session, only: :current
-    before_action :initialize_form,  except: [:index]
+    before_action :initialize_form
     after_action :refresh_current_step, only: [:show, :current, :previous]
     helper_method :form_carrier
 
@@ -43,6 +43,10 @@ module SchoolgirlUniform
     end
 
     private
+
+    def form_attributes
+      initialize_form.class.attributes.map(&:name)
+    end
 
     def paths
       {
