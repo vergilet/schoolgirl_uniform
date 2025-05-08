@@ -1,5 +1,6 @@
-<br>
-<br>
+<p align="right">
+  <a href="https://rubygems.org/gems/schoolgirl_uniform"><img align="right" src="https://user-images.githubusercontent.com/2478436/51829691-c55cc000-22f6-11e9-99a5-42f88a8f2a55.png" width="56" height="56" /></a>
+</p>
 <p align="center">
   <a href="#">
     <img align="center" width="75%" src="https://user-images.githubusercontent.com/2478436/210048098-9d09b442-f057-42e1-b77b-94277928e452.png"/> 
@@ -16,6 +17,7 @@
 </p>
 
 :feet: Multistep form concept for Rails projects. Allows to create complex forms for a few models simultaneously. Supports selectable per step validations without data persistence into db.
+> Currently uses session to store data before actual save. If your sessions are stored in cookies then it has a 4 KB limit.
 
 <br>
 
@@ -48,6 +50,12 @@ To achieve working multistep form you need to configure FVC:
 - :school_satchel: [**Controller**](#school_satchel-controller)
 <hr>
 
+<p align="center">
+  <a href="#">
+    <img align="center" width="75%" src="https://user-images.githubusercontent.com/2478436/210439098-6230592e-4e94-4236-88e6-70d162d5369a.png"/> 
+  </a>
+</p>
+
 ### :womans_clothes: Form
     e.g. CatgirlsSurveyForm - app/forms/catgirls_survey_form.rb
 
@@ -57,16 +65,29 @@ To achieve working multistep form you need to configure FVC:
     %w[first second third]
   end
   ```
-2. Define form fields
+2. Define form fields:
   ```ruby
   attribute :username, String
+  attribute :email, String
+  
+  # attribute :age, Integer, default: 0
+  # attribute :page_numbers, Array[Integer]
+  # attribute :birthday, DateTime
+  # attribute :published, Boolean, default: false
+  
+  # attribute :description, String, default: :default_editor_description
+  
+  # def default_editor_description
+  #   ...
+  # end
   ```
-3. Define validation and select appropriate step for it
+3. Define validation and select appropriate step for it:
   ```ruby
-  validates :username, presence: true, if: proc { on_step('second') }
+  validates :username, presence: true, if: proc { on_step('first') }
+  validates :email, presence: true,    if: proc { on_step('second') }
   ```
-4. Inside `save!` method build your records, set them with form attributes and save them in transaction. 
-   Use `.save!(validate: false)` to skip native validations on model.
+4. Inside `save!` method build your records, set them with form attributes and save them in transaction. \
+   Use `.save!(validate: false)` to skip native validations on model. \
    In order to return the result set the `@identifier` with created records reference/references 
    
    ( e.g. simple `1234` or complex `{user_id: 1234, personal_data_id: 5678}` )
@@ -100,7 +121,8 @@ To achieve working multistep form you need to configure FVC:
 
 #### :infinity: Steps
 
-By default Scaffolding generates 3 steps, but you can modify, delete them or add new steps. Just make sure that steps are **__partials_** and match corresponded names inside **_Form_** (e.g. CatgirlsSurveyForm): 
+By default Scaffolding generates 3 steps, but you can modify, delete or add new steps. \
+Just make sure that steps are **__partials_** and match corresponded names inside **_Form_** (e.g. CatgirlsSurveyForm): 
 
   ```ruby
   # app/views/catgirls_survey/steps/_first.html.erb
@@ -122,7 +144,7 @@ def form_attributes
   [:username, :password, :email, :phone]
 end
 ```
-2. Fetch resource/resources from DB using identifier, which you set in `.save!`
+2. Fetch resource(s) from DB using `identifier`, which you set in `.save!`
 ```ruby
   def finish
     @record = User.find_by(uuid: params[:identifier])
