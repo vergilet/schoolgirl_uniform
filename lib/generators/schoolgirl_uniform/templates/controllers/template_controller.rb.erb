@@ -14,8 +14,8 @@ class <%= class_name.camelcase %>Controller < SchoolgirlUniform::BaseController
 
   def paths
     {
-      current: current_<%= class_name.snakecase %>_path(step: @form.current_step),
-      previous: previous_<%= class_name.snakecase %>_path
+      current: current_<%= class_name.underscore %>_path(step: @form.current_step),
+      previous: previous_<%= class_name.underscore %>_path
     }
   end
 end
