@@ -95,11 +95,9 @@ To achieve working multistep form you need to configure FVC:
   def save!
     user = User.new(username: username)
     personal_data = user.build_personal_data(email: email)
-    
-    ActiveRecord::Base.transaction do
-      user.save!(validate: false)
-      personal_data.save!(validate: false)
-    end
+
+    user.save!(validate: false)
+    personal_data.save!(validate: false)
     
     @identifier = user.id
   end
