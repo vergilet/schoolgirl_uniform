@@ -14,6 +14,19 @@ module SchoolgirlUniform
       raise NotImplementedError
     end
 
+    def save_form!
+      ActiveRecord::Base.transaction do
+        save!
+      rescue => e
+        if defined?(e.record)
+          e.record.errors.each { |error| errors.add(error.attribute, error.message) }
+        else
+          errors.add(:base, e.message)
+        end
+        raise ActiveRecord::Rollback
+      end
+    end
+
     def current_step
       step || steps.first
     end

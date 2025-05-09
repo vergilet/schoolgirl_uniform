@@ -26,6 +26,10 @@ module SchoolgirlUniform
     def current
       if request.post?
         return render :show unless @form.valid?
+
+        @form.save_form! if @form.last_step?
+        return render :show if @form.errors.present?
+
         redirect_to redirect_options
       elsif request.get?
         return render :show if params[:step] == @form.current_step
@@ -45,7 +49,7 @@ module SchoolgirlUniform
     private
 
     def form_attributes
-      initialize_form.class.attributes.map(&:name)
+      initialize_form.class.attribute_set.map(&:name)
     end
 
     def paths
@@ -73,7 +77,6 @@ module SchoolgirlUniform
 
     def redirect_options
       if @form.last_step?
-        @form.save!
         reset_session
         { action: :finish, identifier: @form.identifier }
       else

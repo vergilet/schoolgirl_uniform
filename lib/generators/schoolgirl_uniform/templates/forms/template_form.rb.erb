@@ -40,6 +40,7 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
   validate :custom_phone_validation,                  if: third?
 
   def custom_username_validation
+    errors.add(:username, "#{username} is already taken, enter uniq username") if User.where(username: username).exists?
     errors.add(:username, 'cannot contain "@"') if username.include?('@')
     errors.add(:username, 'cannot contain "#"') if username.include?('#')
     errors.add(:username, 'cannot contain "?"') if username.include?('?')
@@ -62,18 +63,16 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
   end
 
   def custom_phone_validation
-    errors.add(:phone_number, 'should be min 9 symbols') if phone_number.size < 8
-    errors.add(:phone_number, 'should be max 14 symbols') if phone_number.size > 14
+    errors.add(:phone_number, 'should be min 3 symbols') if phone_number.size <= 3
+    errors.add(:phone_number, 'should be max 14 symbols') if phone_number.size >= 14
   end
 
 
   def save!
-    ActiveRecord::Base.transaction do
-      user.save!(validate: false)
-      personal_detail.save!(validate: false)
-      contact_info.save!(validate: false)
-    end
-    @identifier = user.reload.id
+    user.save!(validate: false)
+    personal_detail.save!(validate: false)
+    contact_info.save!(validate: false)
+    @identifier = user.id
   end
 
   private
