@@ -1,56 +1,118 @@
-<div class="results-display">
-  <h3>Registration Complete!</h3>
-  <div class="result-item">
-    <b>ID:</b> <%= @record.id %>
-  </div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px 0;
+    }
 
-  <div class="result-item">
-    <b>Username:</b> <%= @record.username %>
-  </div>
-  <hr>
+    .form-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    /* Finish Step / Results Styling */
+    .results-display {
+        background-color: #e9f5e9; /* Light green background */
+        border: 1px solid #c8e6c9; /* Greenish border */
+        padding: 25px;
+        border-radius: 6px;
+        line-height: 1.8; /* Better readability for text lines */
+        margin-top: 20px; /* Add some space if it's directly after the form */
+    }
 
-  <div class="result-item">
-    <b>Date of Birth:</b> <%= @record.personal_detail&.date_of_birth %>
-  </div>
+    .results-display h3 {
+        margin-top: 0;
+        color: #2e7d32; /* Darker green for the heading */
+        border-bottom: 1px solid #a5d6a7; /* Lighter green border under heading */
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
 
-  <div class="result-item">
-    <b>Gender:</b> <%= @record.personal_detail&.gender %>
-  </div>
+    .results-display .result-item {
+        margin-bottom: 12px; /* Space between each result item */
+        font-size: 1.05em; /* Slightly larger font for readability */
+    }
 
-  <div class="result-item">
-    <b>Favourite Color:</b> <%= @record.personal_detail&.favourite_color %>
-  </div>
+    .results-display .result-item b {
+        color: #333; /* Dark grey for the labels (bold text) */
+        margin-right: 8px; /* Space after the label */
+        display: inline-block; /* Ensures proper spacing and layout */
+        min-width: 120px; /* Optional: aligns values if labels have varying lengths */
+    }
 
-  <div class="result-item">
-    <b>Device Type:</b> <%= @record.personal_detail&.device_type %>
-  </div>
-  <hr>
+    .results-display hr {
+        border: 0;
+        height: 1px;
+        background-color: #d0e0d0; /* Lighter green/grey for the horizontal rule */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+<div class="form-container">
+  <div class="results-display">
+    <h3>Registration Complete!</h3>
+    <div class="result-item">
+      <b>ID:</b> <%= @record.id %>
+    </div>
 
-  <div class="result-item">
-    <b>Email:</b> <%= @record.contact_info&.email %>
-  </div>
+    <div class="result-item">
+      <b>Username:</b> <%= @record.username %>
+    </div>
+    <hr>
 
-  <div class="result-item">
-    <b>Phone Number:</b> <%= @record.contact_info&.phone_number %>
-  </div>
+    <div class="result-item">
+      <b>Date of Birth:</b> <%= @record.personal_detail&.date_of_birth %>
+    </div>
 
-  <div class="result-item">
-    <b>Country:</b> <%= @record.contact_info&.country %>
-  </div>
+    <div class="result-item">
+      <b>Gender:</b> <%= @record.personal_detail&.gender %>
+    </div>
 
-  <div class="result-item">
-    <b>City:</b> <%= @record.contact_info&.city %>
-  </div>
+    <div class="result-item">
+      <b>Favourite Color:</b> <%= @record.personal_detail&.favourite_color %>
+    </div>
 
-  <div class="result-item">
-    <b>Address Line 1:</b> <%= @record.contact_info&.address_field_1 %>
-  </div>
+    <div class="result-item">
+      <b>Device Type:</b> <%= @record.personal_detail&.device_type %>
+    </div>
+    <hr>
 
-  <div class="result-item">
-    <b>Address Line 2:</b> <%= @record.contact_info&.address_field_2 %>
-  </div>
+    <div class="result-item">
+      <b>Email:</b> <%= @record.contact_info&.email %>
+    </div>
 
-  <div class="result-item">
-    <b>Zip Code:</b> <%= @record.contact_info&.zip_code %>
+    <div class="result-item">
+      <b>Phone Number:</b> <%= @record.contact_info&.phone_number %>
+    </div>
+
+    <div class="result-item">
+      <b>Country:</b> <%= @record.contact_info&.country %>
+    </div>
+
+    <div class="result-item">
+      <b>City:</b> <%= @record.contact_info&.city %>
+    </div>
+
+    <div class="result-item">
+      <b>Address Line 1:</b> <%= @record.contact_info&.address_field_1 %>
+    </div>
+
+    <div class="result-item">
+      <b>Address Line 2:</b> <%= @record.contact_info&.address_field_2 %>
+    </div>
+
+    <div class="result-item">
+      <b>Zip Code:</b> <%= @record.contact_info&.zip_code %>
+    </div>
   </div>
 </div>

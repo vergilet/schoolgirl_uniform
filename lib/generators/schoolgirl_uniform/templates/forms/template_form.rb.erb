@@ -63,8 +63,8 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
   end
 
   def custom_phone_validation
-    errors.add(:phone_number, 'should be min 3 symbols') if phone_number.size <= 3
-    errors.add(:phone_number, 'should be max 14 symbols') if phone_number.size >= 14
+    errors.add(:phone_number, 'should be min 3 symbols') if phone_number.size < 3
+    errors.add(:phone_number, 'should be max 14 symbols') if phone_number.size > 14
   end
 
 
