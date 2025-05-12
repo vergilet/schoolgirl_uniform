@@ -117,7 +117,7 @@ To achieve working multistep form you need to configure FVC:
   ```
 <br>
 
-#### 4. Inside `save!` method build your records, set them with form attributes and save. \
+#### 4. Inside `save!` method build your records, set them with form attributes and save.
    Use `.save!(validate: false)` to skip native validations on model. \
    In order to return the result declare attr_reader and set the `@identifier` or similar variables with created records reference/references 
    
