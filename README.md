@@ -67,9 +67,9 @@ To achieve working multistep form you need to configure FVC:
 
   def self.steps_details
     {
-      first: 'Credentials',                   # no description
-      second: { title: 'Personal Details' },  # also no description but via title
-      third: { title: 'Contact Information', description: 'Some cool info we want you to provide' }
+      first: 'Credentials',                   # direct title
+      second: { title: 'Personal Details' },  # title via key
+      third: { title: 'Contact Information', description: 'Some cool info we want you to provide' } # title and description, can be more fields...
     }
   end
   ```
@@ -119,8 +119,6 @@ To achieve working multistep form you need to configure FVC:
   # multiple
   # attr_reader :user_id
   # attr_reader :contact_info_id
-
-
 
   def save!
     user.save!(validate: false)
