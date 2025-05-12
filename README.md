@@ -60,47 +60,79 @@ To achieve working multistep form you need to configure FVC:
 ### :womans_clothes: Form
     e.g. CatgirlsSurveyForm - app/forms/catgirls_survey_form.rb
 
-1. Declare the steps in your form:
+1. Declare the steps and details if needed in your form:
+
   ```ruby
-  ...
   steps %w[first second third]
-  ...
+
+  def self.steps_details
+    {
+      first: 'Credentials',                   # no description
+      second: { title: 'Personal Details' },  # also no description but via title
+      third: { title: 'Contact Information', description: 'Some cool info we want you to provide' }
+    }
+  end
   ```
 2. Define form fields:
   ```ruby
-  attribute :username, String
-  attribute :email, String
-  
-  # attribute :age, Integer, default: 0
-  # attribute :page_numbers, Array[Integer]
-  # attribute :birthday, DateTime
-  # attribute :published, Boolean, default: false
-  
-  # attribute :description, String, default: :default_editor_description
-  
-  # def default_editor_description
-  #   ...
-  # end
+  attribute :username,         :string
+  attribute :password,         :string
+
+  attribute :date_of_birth,    :date
+  attribute :gender,           :string
+  attribute :favourite_color,  :string
+  attribute :device_type,      :string
+
+  attribute :email,            :string
+  attribute :phone_number,     :string
+  attribute :country,          :string
+  attribute :city,             :string
+  attribute :address_field_1,  :string
+  attribute :address_field_2,  :string
+  attribute :zip_code,         :string
   ```
-3. Define validation and select appropriate step for it:
+
+3. Use block validations with step condition to group needed checks:
   ```ruby
-  validates :username, presence: true, if: first?
-  validates :email, presence: true,    if: second?
+  with_options if: :first? do |step|
+    step.validates :username, presence: true, length: 3..10
+    step.validate :custom_username_validation
+    ...
+  end
+
+  with_options if: :second? do |step|
+    step.validates :date_of_birth, presence: true
+    step.validate :custom_date_of_birth_validation
+    ...
+  end
   ```
-4. Inside `save!` method build your records, set them with form attributes and save them in transaction. \
+4. Inside `save!` method build your records, set them with form attributes and save. \
    Use `.save!(validate: false)` to skip native validations on model. \
-   In order to return the result set the `@identifier` with created records reference/references 
+   In order to return the result declare attr_reader and set the `@identifier` or similar variables with created records reference/references 
    
    ( e.g. simple `1234` or complex `{user_id: 1234, personal_data_id: 5678}` )
+  
   ```ruby
-  def save!
-    user = User.new(username: username)
-    personal_data = user.build_personal_data(email: email)
 
+  attr_reader :identifier
+
+  # multiple
+  # attr_reader :user_id
+  # attr_reader :contact_info_id
+
+
+
+  def save!
     user.save!(validate: false)
-    personal_data.save!(validate: false)
-    
+    personal_detail.save!(validate: false)
+    contact_info.save!(validate: false)
     @identifier = user.id
+
+    # multiple
+    # @identifier = {user_id: user.id, contact_info_id: contact_info.id}
+    # or
+    # @user_id = user.id
+    # @contact_info_id = contact_info.id
   end
   ```
 ### :dress: View
