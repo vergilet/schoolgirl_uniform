@@ -69,12 +69,14 @@ To achieve working multistep form you need to configure FVC:
 
   def self.steps_details
     {
-      first: 'Credentials',                   # direct title
-      second: { title: 'Personal Details' },  # title via key
-      third: { title: 'Contact Information', description: 'Some cool info we want you to provide' } # title and description, can be more fields...
+      first: 'Credentials',
+      second: 'Personal Details'
+      third: 'Contact Information'
     }
   end
   ```
+:blue_book: How to [customize steps titles and descriptions](https://github.com/vergilet/schoolgirl_uniform/wiki/1.-Decorate-steps)
+
 <br>
 
 #### 2. Define form fields:
@@ -96,6 +98,8 @@ To achieve working multistep form you need to configure FVC:
   attribute :address_field_2,  :string
   attribute :zip_code,         :string
   ```
+:blue_book: Different types and [how to add custom types such as `Array` and `hash` explained.](https://github.com/vergilet/schoolgirl_uniform/wiki/4.-Array-and-Hash-and-other-custom-types)
+
 <br>
 
 #### 3. Use block validations with step condition to group needed checks:
@@ -116,10 +120,6 @@ To achieve working multistep form you need to configure FVC:
 <br>
 
 #### 4. Inside `save!` method build your records, set them with form attributes and save.
-   Use `.save!(validate: false)` to skip native validations on model. \
-   In order to return the result declare attr_reader and set the `@identifier` or similar variables with created records reference/references 
-   
-   ( e.g. simple `1234` or complex `{user_id: 1234, personal_data_id: 5678}` )
   
   ```ruby
 
@@ -133,15 +133,12 @@ To achieve working multistep form you need to configure FVC:
     user.save!(validate: false)
     personal_detail.save!(validate: false)
     contact_info.save!(validate: false)
-    @identifier = user.id
 
-    # multiple
-    # @identifier = {user_id: user.id, contact_info_id: contact_info.id}
-    # or
-    # @user_id = user.id
-    # @contact_info_id = contact_info.id
+    @identifier = user.id
   end
   ```
+:blue_book: Check more [complex examples and how to read them on the controller](https://github.com/vergilet/schoolgirl_uniform/wiki/5.-Returning-Complex-Results). 
+
 <br>
 
 ### :dress: View
@@ -183,15 +180,9 @@ Fetch resource(s) from DB using `identifier`, which you set in `.save!`
 ```ruby
   def finish
     @record = User.find_by(id: params[:identifier])
-
-    # advanced
-    # @user = User.find_by(id: params[:identifier][:user_id])
-    # @contact_info = ContactInfo.find_by(id: params[:identifier][:contact_info])
-    # or
-    # @user = User.find_by(id: params[:user_id])
-    # @contact_info = ContactInfo.find_by(id: params[:contact_info_id])
   end
 ```
+:blue_book: Check more [complex examples and how to read them on the controller](https://github.com/vergilet/schoolgirl_uniform/wiki/5.-Returning-Complex-Results). 
 
 <br>
 
