@@ -21,7 +21,8 @@
 
 <br>
 
-## Installation
+<h2 style="border-bottom: 0">Installation</h2>
+<hr>
 
 To start using it just add this line to your application's Gemfile:
 
