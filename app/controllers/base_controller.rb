@@ -78,7 +78,7 @@ module SchoolgirlUniform
     def redirect_options
       if @form.last_step?
         reset_session
-        { action: :finish, identifier: @form.identifier }
+        { action: :finish, identifier: @form.identifier.to_param }
       else
         @form.next_step
         { action: :current, step: @form.current_step }
