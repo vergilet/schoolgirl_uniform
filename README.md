@@ -63,6 +63,9 @@ To achieve working multistep form you need to configure FVC:
 ### :womans_clothes: Form
     e.g. CatgirlsSurveyForm - app/forms/catgirls_survey_form.rb
 
+<br>
+<br>
+
 1. Declare the steps and details if needed in your form:
 
   ```ruby
