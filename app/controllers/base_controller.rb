@@ -49,7 +49,7 @@ module SchoolgirlUniform
     private
 
     def form_attributes
-      initialize_form.class.attribute_set.map(&:name)
+      initialize_form.attributes.keys
     end
 
     def paths
