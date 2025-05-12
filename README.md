@@ -21,9 +21,7 @@
 
 <br>
 
-<h2 style="border-bottom: 0">Installation</h2>
-
-<hr>
+### Installation
 
 To start using it just add this line to your application's Gemfile:
 
@@ -42,7 +40,7 @@ $ rails generate schoolgirl_uniform:install CatgirlsSurvey
 
 <br>
 
-## Usage and Config
+### Usage and Config
 
 To achieve working multistep form you need to configure FVC:
 
