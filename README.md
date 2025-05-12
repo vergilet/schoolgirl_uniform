@@ -146,6 +146,7 @@ To achieve working multistep form you need to configure FVC:
   ```
 <br>
 <br>
+
 ### :dress: View
  - Scaffolding will generate example structure of view files:
     - _show.html.erb_
@@ -162,6 +163,7 @@ To achieve working multistep form you need to configure FVC:
 :art: Feel free to modify html and styles around the form.
 <br>
 <br>
+
 #### :infinity: Steps
 
 By default Scaffolding generates 3 steps, but you can modify, delete or add new steps. \
