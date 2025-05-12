@@ -64,7 +64,7 @@ To achieve working multistep form you need to configure FVC:
 
 <br>
 
-1. Declare the steps and details if needed in your form:
+#### 1. Declare the steps and details if needed in your form:
 
   ```ruby
   steps %w[first second third]
@@ -79,7 +79,7 @@ To achieve working multistep form you need to configure FVC:
   ```
 <br>
 
-2. Define form fields:
+#### 2. Define form fields:
 
   ```ruby
   attribute :username,         :string
@@ -100,7 +100,7 @@ To achieve working multistep form you need to configure FVC:
   ```
 <br>
 
-3. Use block validations with step condition to group needed checks:
+#### 3. Use block validations with step condition to group needed checks:
 
   ```ruby
   with_options if: :first? do |step|
@@ -117,7 +117,7 @@ To achieve working multistep form you need to configure FVC:
   ```
 <br>
 
-4. Inside `save!` method build your records, set them with form attributes and save. \
+#### 4. Inside `save!` method build your records, set them with form attributes and save. \
    Use `.save!(validate: false)` to skip native validations on model. \
    In order to return the result declare attr_reader and set the `@identifier` or similar variables with created records reference/references 
    
