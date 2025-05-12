@@ -70,7 +70,7 @@ To achieve working multistep form you need to configure FVC:
   def self.steps_details
     {
       first: 'Credentials',
-      second: 'Personal Details'
+      second: 'Personal Details',
       third: 'Contact Information'
     }
   end
