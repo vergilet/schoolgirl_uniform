@@ -19,8 +19,8 @@ module SchoolgirlUniform
         @defined_steps || []
       end
 
-      def step_names
-        defined_steps
+      def steps_details
+        defined_steps.each_with_object({}) { |step, hash| hash[step] = step }
       end
     end
 
@@ -78,8 +78,8 @@ module SchoolgirlUniform
       self.class.defined_steps
     end
 
-    def step_names
-      self.class.step_names
+    def steps_details
+      self.class.steps_details
     end
 
     def current_step_index

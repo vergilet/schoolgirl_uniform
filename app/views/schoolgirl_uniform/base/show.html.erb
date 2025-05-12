@@ -21,9 +21,10 @@
         margin-bottom: 20px;
     }
 
+    /* Step Wizard Styling */
     .schoolgirl-uniform-step-wizard {
-        display: flex;
-        justify-content: space-around;
+        display: flex; /* Use flexbox for alignment */
+        justify-content: space-around; /* Distribute milestones evenly */
         margin-bottom: 30px;
         padding-bottom: 15px;
         border-bottom: 1px solid #e0e0e0;
@@ -32,35 +33,37 @@
     .schoolgirl-uniform-step-wizard .milestone {
         padding: 8px 15px;
         border: 1px solid #ccc;
-        border-radius: 20px;
+        border-radius: 20px; /* More rounded */
         background-color: #f9f9f9;
         color: #555;
         font-size: 0.9em;
         text-align: center;
-        flex-grow: 1;
-        margin: 0 5px;
+        flex-grow: 1; /* Allow milestones to grow */
+        margin: 0 5px; /* Add some spacing between milestones */
     }
 
-    .schoolgirl-uniform-step-wizard .milestone.active {
-        background-color: #4CAF50;
+    .schoolgirl-uniform-step-wizard .milestone.active { /* Active step */
+        background-color: #4CAF50; /* A more standard green */
         color: white;
         border-color: #388E3C;
     }
 
-    .schoolgirl-uniform-step-wizard .milestone.completed {
+    .schoolgirl-uniform-step-wizard .milestone.completed { /* Completed step (optional, if you want to differentiate) */
         background-color: #D4EDDA;
         color: #155724;
         border-color: #C3E6CB;
     }
 
+    /* Form Styling */
     .multistep-form .form-step-content {
-        border: 1px solid #ddd;
+        border: 1px solid #ddd; /* Border for each step's content area */
         padding: 25px;
         border-radius: 6px;
         margin-bottom: 25px;
         background-color: #fdfdfd;
     }
 
+    /* Styling for individual form fields/groups */
     .multistep-form .form-group {
         margin-bottom: 20px;
     }
@@ -77,13 +80,13 @@
     .multistep-form .form-group input[type="password"],
     .multistep-form .form-group input[type="date"],
     .multistep-form .form-group input[type="email"],
-    .multistep-form .form-group input[type="tel"],
+    .multistep-form .form-group input[type="tel"], /* For phone_number */
     .multistep-form .form-group select {
-        width: 100%;
+        width: 100%; /* Make inputs take full width of their container */
         padding: 12px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        box-sizing: border-box;
+        box-sizing: border-box; /* Important for width calculation */
         font-size: 1em;
         transition: border-color 0.3s ease;
     }
@@ -99,8 +102,10 @@
         box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
     }
 
+    /* Error Styling */
+    /* Error Styling for individual fields (Rails default) */
     .field_with_errors {
-        display: inline-block;
+        display: inline-block; /* Or 'block' if you prefer full width */
         width: 100%;
     }
     .field_with_errors input,
@@ -108,28 +113,30 @@
         border: 1px solid red !important;
     }
 
+    /* Custom Error Messages Block Styling (User Provided) */
     .schoolgirl-uniform-errors {
         border: 1px solid red;
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 4px;
-        background-color: #ffebeb;
+        padding: 10px; /* Added some padding for better appearance */
+        margin-bottom: 20px; /* Added margin for spacing */
+        border-radius: 4px; /* Optional: for rounded corners */
+        background-color: #ffebeb; /* Optional: light red background */
     }
     .schoolgirl-uniform-errors ul {
-        list-style-type: none;
-        padding-left: 0;
+        list-style-type: none; /* Removes default bullet points */
+        padding-left: 0; /* Removes default padding */
         margin: 0;
     }
     .schoolgirl-uniform-errors li {
-        margin-bottom: 5px;
+        margin-bottom: 5px; /* Spacing between error messages */
     }
     .schoolgirl-uniform-errors span {
         color: red;
     }
 
+    /* Navigation Buttons Styling */
     .form-navigation {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between; /* Puts 'back' and 'next/submit' on opposite ends */
         align-items: center;
         margin-top: 25px;
         padding-top: 20px;
@@ -147,7 +154,7 @@
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .form-navigation a {
+    .form-navigation a { /* Back button */
         background-color: #6c757d;
         color: white;
     }
@@ -156,8 +163,8 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .form-navigation input[type="submit"] {
-        background-color: #007bff;
+    .form-navigation input[type="submit"] { /* Next/Submit button */
+        background-color: #007bff; /* A nice blue for primary action */
         color: white;
     }
     .form-navigation input[type="submit"]:hover {
