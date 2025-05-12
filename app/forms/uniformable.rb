@@ -1,34 +1,59 @@
 module SchoolgirlUniform
   module Uniformable
+    module ClassMethods
+      def steps(*step_list)
+        @defined_steps = step_list.flatten.map(&:to_s)
+        attribute :step, :string, default: -> { @defined_steps.first }
 
-    def self.included(base)
-      base.include ActiveModel::Model
-      base.include Virtus.model
+        @defined_steps.each do |step_name|
+          helper_method_name = "#{step_name}?"
+          unless method_defined?(helper_method_name)
+            define_method helper_method_name do
+              current_step == step_name
+            end
+          end
+        end
+      end
+
+      def defined_steps
+        @defined_steps || []
+      end
+
+      def step_names
+        defined_steps
+      end
     end
 
-    def initialize(options = {})
-      initialize_attributes(options)
+    def self.included(base)
+      base.extend(ClassMethods)
+      base.include ActiveModel::Model
+      base.include ActiveModel::Attributes
     end
 
     def save!
-      raise NotImplementedError
+      raise NotImplementedError, "#{self.class.name} must implement #save!"
     end
 
     def save_form!
+      unless defined?(ActiveRecord::Base)
+        raise "ActiveRecord::Base not available for transaction"
+      end
+
       ActiveRecord::Base.transaction do
         save!
       rescue => e
-        if defined?(e.record)
+        if e.respond_to?(:record) && e.record.respond_to?(:errors)
           e.record.errors.each { |error| errors.add(error.attribute, error.message) }
         else
           errors.add(:base, e.message)
         end
         raise ActiveRecord::Rollback
       end
+      errors.empty?
     end
 
     def current_step
-      step || steps.first
+      step
     end
 
     def next_step
@@ -42,15 +67,15 @@ module SchoolgirlUniform
     end
 
     def first_step?
-      current_step == steps.first
+      current_step == self.class.defined_steps.first
     end
 
     def last_step?
-      current_step == steps.last
+      current_step == self.class.defined_steps.last
     end
 
     def steps
-      self.class.steps
+      self.class.defined_steps
     end
 
     def step_names
@@ -58,30 +83,22 @@ module SchoolgirlUniform
     end
 
     def current_step_index
-      steps.index(current_step)
-    end
-
-    private
-
-    def initialize_attributes(new_attributes)
-      self.errors ||= ActiveModel::Errors.new(self)
-      self.attributes = defaults.merge(new_attributes)
-    end
-
-    def defaults
-      { }
+      Array(steps).index(current_step)
     end
 
     def persisted?
       false
     end
 
+    private
+
     def shift_step(delta)
-      self.step = steps[steps.index(current_step) + delta]
+      idx = current_step_index
+      return unless idx
+
+      new_index = idx + delta
+      self.step = steps[new_index] if new_index >= 0 && new_index < steps.length
     end
 
-    def on_step(step)
-      current_step == step
-    end
   end
 end

@@ -1,20 +1,21 @@
-class <%= class_name %>Form < SchoolgirlUniform::BaseForm
+class <%= class_name %>Form
+  include SchoolgirlUniform::Uniformable
 
-  attribute :username, String
-  attribute :password, String
+  attribute :username, :string
+  attribute :password, :string
 
-  attribute :date_of_birth, Date
-  attribute :gender, String
-  attribute :favourite_color, String
-  attribute :device_type, String
+  attribute :date_of_birth, :date
+  attribute :gender, :string
+  attribute :favourite_color, :string
+  attribute :device_type, :string
 
-  attribute :email, String
-  attribute :phone_number, String
-  attribute :country, String
-  attribute :city, String
-  attribute :address_field_1, String
-  attribute :address_field_2, String
-  attribute :zip_code, String
+  attribute :email, :string
+  attribute :phone_number, :string
+  attribute :country, :string
+  attribute :city, :string
+  attribute :address_field_1, :string
+  attribute :address_field_2, :string
+  attribute :zip_code, :string
 
   steps %w[first second third]
 
@@ -26,18 +27,31 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
     }
   end
 
-  validates :username, presence: true, length: 3..10, if: first?
-  validate :custom_username_validation,               if: first?
-  validates :password, length: { minimum: 3 },        if: first?
+  attr_reader :identifier
 
-  validates :date_of_birth, presence: true,           if: second?
-  validate :custom_date_of_birth_validation,          if: second?
+  # advanced
+  # attr_reader :user_id
+  # attr_reader :contact_info_id
 
-  validates :email, presence: true,                   if: third?
-  validate :custom_email_validation,                  if: third?
 
-  validates :phone_number, presence: true,            if: third?
-  validate :custom_phone_validation,                  if: third?
+  with_options if: :first? do |step|
+    step.validates :username, presence: true, length: 3..10
+    step.validate :custom_username_validation
+    step.validates :password, length: { minimum: 3 }
+  end
+
+  with_options if: :second? do |step|
+    step.validates :date_of_birth, presence: true
+    step.validate :custom_date_of_birth_validation
+  end
+
+  with_options if: :third? do |step|
+    step.validates :email, presence: true
+    step.validate :custom_email_validation
+
+    step.validates :phone_number, presence: true
+    step.validate :custom_phone_validation
+  end
 
   def custom_username_validation
     errors.add(:username, "#{username} is already taken, enter uniq username") if User.where(username: username).exists?
@@ -73,6 +87,12 @@ class <%= class_name %>Form < SchoolgirlUniform::BaseForm
     personal_detail.save!(validate: false)
     contact_info.save!(validate: false)
     @identifier = user.id
+
+    # advanced
+    # @identifier = {user_id: user.id, contact_info_id: contact_info.id}
+    # or
+    # @user_id = user.id
+    # @contact_info_id = contact_info.id
   end
 
   private
