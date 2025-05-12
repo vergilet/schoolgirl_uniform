@@ -22,6 +22,7 @@
 <br>
 
 <h2 style="border-bottom: 0">Installation</h2>
+
 <hr>
 
 To start using it just add this line to your application's Gemfile:
@@ -39,6 +40,8 @@ $ rails generate schoolgirl_uniform:install CatgirlsSurvey
 
 > You can also use snake case, so `catgirls_survey` would be identical to `CatgirlsSurvey` and will generate the same output during scaffolding.
 
+<br>
+<br>
 
 ## Usage and Config
 
@@ -73,6 +76,9 @@ To achieve working multistep form you need to configure FVC:
     }
   end
   ```
+<br>
+<br>
+
 2. Define form fields:
   ```ruby
   attribute :username,         :string
@@ -91,6 +97,8 @@ To achieve working multistep form you need to configure FVC:
   attribute :address_field_2,  :string
   attribute :zip_code,         :string
   ```
+<br>
+<br>
 
 3. Use block validations with step condition to group needed checks:
   ```ruby
@@ -106,6 +114,9 @@ To achieve working multistep form you need to configure FVC:
     ...
   end
   ```
+<br>
+<br>
+
 4. Inside `save!` method build your records, set them with form attributes and save. \
    Use `.save!(validate: false)` to skip native validations on model. \
    In order to return the result declare attr_reader and set the `@identifier` or similar variables with created records reference/references 
@@ -133,6 +144,8 @@ To achieve working multistep form you need to configure FVC:
     # @contact_info_id = contact_info.id
   end
   ```
+<br>
+<br>
 ### :dress: View
  - Scaffolding will generate example structure of view files:
     - _show.html.erb_
@@ -147,7 +160,8 @@ To achieve working multistep form you need to configure FVC:
 
 :exclamation: Please notice that **_show_** and **_finish_** are action views, others are partials. \
 :art: Feel free to modify html and styles around the form.
-
+<br>
+<br>
 #### :infinity: Steps
 
 By default Scaffolding generates 3 steps, but you can modify, delete or add new steps. \
@@ -162,7 +176,8 @@ Just make sure that steps are **__partials_** and match corresponded names insid
   <%= form.label :password %>
   <%= form.text_field :password %>
   ```
-
+<br>
+<br>
 
 ### :school_satchel: Controller
 e.g. CatgirlsSurveyController - app/controllers/catgirls_survey_controller.rb
@@ -178,8 +193,9 @@ Fetch resource(s) from DB using `identifier`, which you set in `.save!`
     @record2 = Author.find_by(id: params[:identifier][:author_id])
   end
 ```
- 
- 
+<br>
+<br>
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/vergilet/schoolgirl_uniform
