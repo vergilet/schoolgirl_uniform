@@ -84,8 +84,8 @@ To achieve working multistep form you need to configure FVC:
   ```
 3. Define validation and select appropriate step for it:
   ```ruby
-  validates :username, presence: true, if: proc { on_step('first') }
-  validates :email, presence: true,    if: proc { on_step('second') }
+  validates :username, presence: true, if: first?
+  validates :email, presence: true,    if: second?
   ```
 4. Inside `save!` method build your records, set them with form attributes and save them in transaction. \
    Use `.save!(validate: false)` to skip native validations on model. \
@@ -135,15 +135,9 @@ Just make sure that steps are **__partials_** and match corresponded names insid
 
 
 ### :school_satchel: Controller
-    e.g. CatgirlsSurveyController - app/controllers/catgirls_survey_controller.rb
+e.g. CatgirlsSurveyController - app/controllers/catgirls_survey_controller.rb
 
-1. Make sure you have listed all form fields (used for permit params)
-```ruby
-def form_attributes
-  [:username, :password, :email, :phone]
-end
-```
-2. Fetch resource(s) from DB using `identifier`, which you set in `.save!`
+Fetch resource(s) from DB using `identifier`, which you set in `.save!`
 ```ruby
   def finish
     @record = User.find_by(uuid: params[:identifier])
