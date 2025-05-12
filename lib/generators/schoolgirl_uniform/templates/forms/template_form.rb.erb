@@ -29,11 +29,6 @@ class <%= class_name %>Form
 
   attr_reader :identifier
 
-  # advanced
-  # attr_reader :user_id
-  # attr_reader :contact_info_id
-
-
   with_options if: :first? do |step|
     step.validates :username, presence: true, length: 3..10
     step.validate :custom_username_validation
@@ -87,12 +82,6 @@ class <%= class_name %>Form
     personal_detail.save!(validate: false)
     contact_info.save!(validate: false)
     @identifier = user.id
-
-    # advanced
-    # @identifier = {user_id: user.id, contact_info_id: contact_info.id}
-    # or
-    # @user_id = user.id
-    # @contact_info_id = contact_info.id
   end
 
   private
