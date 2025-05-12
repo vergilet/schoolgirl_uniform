@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
                           Supports selectable per step validations without data persistence into db.}
   spec.homepage      = "https://github.com/vergilet/schoolgirl_uniform"
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 2.7.0'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -33,9 +34,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency 'activemodel'
+  spec.add_runtime_dependency 'activemodel', ['>= 5.2', '< 9.0']
 
-  spec.add_dependency "bundler", '~> 2.0'
-  spec.add_dependency "rake", '~> 13.0'
-  spec.add_dependency "rspec", '~> 3.5'
+  spec.add_development_dependency "bundler", '~> 2.0'
+  spec.add_development_dependency "rake", '~> 13.0'
+  spec.add_development_dependency "rspec", '~> 3.5'
 end
