@@ -184,12 +184,14 @@ e.g. CatgirlsSurveyController - app/controllers/catgirls_survey_controller.rb
 Fetch resource(s) from DB using `identifier`, which you set in `.save!`
 ```ruby
   def finish
-    @record = User.find_by(uuid: params[:identifier])
-    ...
-    # or if you have a few identifiers
-    ...
-    @record1 = Book.find_by(title: params[:identifier][:title])
-    @record2 = Author.find_by(id: params[:identifier][:author_id])
+    @record = User.find_by(id: params[:identifier])
+
+    # advanced
+    # @user = User.find_by(id: params[:identifier][:user_id])
+    # @contact_info = ContactInfo.find_by(id: params[:identifier][:contact_info])
+    # or
+    # @user = User.find_by(id: params[:user_id])
+    # @contact_info = ContactInfo.find_by(id: params[:contact_info_id])
   end
 ```
 
