@@ -125,10 +125,6 @@ To achieve working multistep form you need to configure FVC:
 
   attr_reader :identifier
 
-  # multiple
-  # attr_reader :user_id
-  # attr_reader :contact_info_id
-
   def save!
     user.save!(validate: false)
     personal_detail.save!(validate: false)
