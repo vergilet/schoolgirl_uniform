@@ -1,6 +1,6 @@
 <div class="schoolgirl-uniform-step-wizard">
   <% form.steps.each_with_index do |step, index| %>
-    <div class="milestone <%= 'active' if form.current_step_index >= index %>">
+    <div class="milestone <%= 'passed' if form.current_step_index > index %> <%= 'active' if form.current_step_index == index %>">
       <span><%= form.steps_details[step.to_sym] || step %></span>
     </div>
   <% end %>
