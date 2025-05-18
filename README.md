@@ -170,7 +170,7 @@ Just make sure that steps are **__partials_** and match corresponded names insid
 <br>
 
 ### :school_satchel: Controller
-e.g. CatgirlsSurveyController - app/controllers/catgirls_survey_controller.rb
+    e.g. CatgirlsSurveyController - app/controllers/catgirls_survey_controller.rb
 
 Fetch resource(s) from DB using `identifier`, which you set in `.save!`
 ```ruby
